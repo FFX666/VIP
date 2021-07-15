@@ -330,7 +330,7 @@ export shareCode=""
 
 ```
 ## 签到领现金添加变量方式
-自行添加变量设置邀请码 格式如下 默认10个
+### 自行添加变量设置邀请码 格式如下 默认10个
 export cashinviteCode=""
 export cashinviteCode2=""
 export cashinviteCode3=""
@@ -424,6 +424,51 @@ export Cupexid="39"
 export Readck="" ##自己CK
 export Read10UA="" ##自己设备UA
 export jrpush="" ##填true推送消息，默认不推送
+```
+
+
+## smiek2221 环境变量
+
+```
+## 燃动夏季—入会
+export summer_movement_joinjoinjoinhui="false" ##是否入会 true 入会，false 不入会
+```
+
+```
+## 燃动夏季—百元守卫战SH
+export summer_movement_ShHelpFlag="1" ##0 不开启也不助力 1 开启并助力 2 开启但不助力 默认开启并助力
+```
+
+```
+## 燃动夏季-新增只做邀请助力功能
+export summer_movement_HelpHelpHelpFlag="false" ##是否只执行邀请助力 true 是 false 不是 默认 false
+### 可以设置13点执行一下脚本
+if [ $(date "+%H") -eq 13 ]; then
+    export summer_movement_HelpHelpHelpFlag="true"
+fi
+```
+
+
+## cdle 环境变量
+
+```
+## 签到领现金兑换
+### 需要填写exchangeAccounts参数，兑换多少取决于app内显示，默认为所有账号兑换10红包，部分账号会出现参数错误的提示。
+### 填写 pt_pin@金额，pt_pin为用户名，可以在 COOKIES 中提取；金额为 2 或 10，例如 LiLei@2 或 HanMeimei@10。多值用 & 连接，例如 LiLei@2&HanMeimei@10
+export exchangeAccounts="pt_pin1@2"  ##抢2元红包
+##export exchangeAccounts="pt_pin2@10"  ##抢10元红包，比较难兑
+```
+
+```
+## 全民运动会守卫红包
+### 助力码，需手动抓包
+export olympicgames_inviteId=""
+```
+
+```
+## 愤怒的锦鲤
+### 高速并发请求，专治偷助力。在kois环境变量中填入需要助力的pt_pin，有多个请用@符号连接
+export kois="pt_pin1@pt_pin2"
 ```
 
 
