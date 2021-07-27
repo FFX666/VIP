@@ -217,6 +217,28 @@ export PURCHASE_SHOPS=""
 export TUAN_ACTIVEID=""
 ```
 
+```
+## 22、京东UA。点点券脚本运行环境变量
+export JD_USER_AGENT="jdltapp;iPhone;3.1.0;14.4;3b6e79334551fc6f31952d338b996789d157c4e8"
+```
+
+```
+## 23、京东试用jd_try相关环境变量
+### 控制每次获取商品数量，默认12
+export JD_TRY_PAGE_SIZE=""
+### 商品分类，以 @ 隔开，示例：家用电器@手机数码@电脑办公@家居家装
+export JD_TRY_CIDS_KEYS=""
+### 试用类型，以 @ 隔开，示例：免费试用@闪电试
+export JD_TRY_TYPE_KEYS=""
+### 过滤试用商品关键字，以 @ 隔开(默认内置了很多关键字，建议使用默认)
+export JD_TRY_GOOD_FILTERS=""
+### 试用商品最低价格
+export JD_TRY_MIN_PRICE=""
+### 试用商品最多提供数量（过滤垃圾商品）
+export JD_TRY_MAX_SUPPLY_COUNT=""
+```
+
+
 ## 阿道夫部分环境变量
 
 ```
@@ -255,28 +277,17 @@ export HALF_RAIN_RRA="" ##不解释，先放着
 ```
 
 
-## JDHelloWorld 部分环境变量
-
-```
-## 宠汪汪二代目
-### 默认80，10、20、40、80可选
-export feedNum="80"
-### 默认双人跑
-export JD_JOY_teamLevel="2"
-```
-
-
 ## 柠檬（胖虎部分环境变量）
 
 ```
-## 京喜工厂抢茅台
+## 1、京喜工厂抢茅台
 ### 自定义商品变量
 export shopid="1598" ##你要商品ID 冰箱
 export shopid1="1607"  ##你要商品ID 茅台
 ```
 
 ```
-## 推一推
+## 2、推一推
 ### 入口：极速版-赚金币 
 ### 分享到QQ查看邀请码，packetId就是
 ### 自定义变量
@@ -284,14 +295,14 @@ export tytpacketId=""
 ```
 
 ```
-## 是兄弟就砍我
+## 3、是兄弟就砍我
 ### 自定义邀请码环境变量
 export actId="" ##你要参加砍价的商品ID
 export packetId="" ##你要参加砍价的邀请码
 ```
 
 ```
-## 是兄弟就砍我2
+## 4、是兄弟就砍我2
 ### 惊喜欢乐砍 自定义变量 入口：京喜APP-我的-惊喜欢乐砍
 export launchid="" ##你的邀请码
 export first="false" ##第一次参加变量设置为true查看商品ID，填写商品ID后自动获取邀请码邀请；如果只助力，变量设置为false
@@ -299,14 +310,14 @@ export active="" ##商品ID
 ```
 
 ```
-## 赚金币
+## 5、赚金币
 ### 入口：极速版-百元生活费-赚金币-邀请好友
 ### 第一次运行可不填写邀请码，运行一次查看自己的邀请码
 export InviterPin="" ##你的邀请码
 ```
 
 ```
-## 0元砍价，入口：京东-我的-0元砍价
+## 6、0元砍价，入口：京东-我的-0元砍价
 ### 使用教程：
 ### 第一步，运行脚本一次日志查看商品ID
 ### 获取你要砍价的ID后变量填写
@@ -316,20 +327,20 @@ export activity="" ##这里填获取的商品activityId
 ```
 
 ```
-## 邀请有礼  
+## 7、邀请有礼  
 ### 自定义邀请码环境变量
 export yqm="" ##你的邀请码
 ```
 
 ```
-## 全民挖现金
+## 8、全民挖现金
 ### 入口：京东-我的-全民挖现金
 ### 运行一次查看邀请码 变量你的邀请码 
 export shareCode=""
 ```
 
 ```
-## 签到领现金添加变量方式
+## 9、签到领现金添加变量方式
 ### 自行添加变量设置邀请码 格式如下 默认10个
 export cashinviteCode=""
 export cashinviteCode2=""
@@ -337,12 +348,12 @@ export cashinviteCode3=""
 ```
 
 ```
-## 大老板农场 新增自定义变量通知开关
+## 10、大老板农场 新增自定义变量通知开关
 export dlbtz="true" ##通知打开，false为关闭
 ```
 
 ```
-## 零食街自动兑换变量
+## 11、零食街自动兑换变量
 ### 自行取消注释和注释
 ##export ljsdh="jdAward1" ##兑换5豆
 ##export ljsdh="jdAward2" ##兑换10豆
@@ -354,13 +365,34 @@ export ljsdh="jdAward3" ##兑换100豆
 ## curtinlv 环境变量
 
 ```
-## 赚京豆
+## 1、赚京豆
 ### 助力账号，填写pt_pin或用户名的值，如 zlzh = ['aaaa','xxxx','yyyy'] ，支持ENV
 export zlzh=['CurtinLV','xxxx','yyyy']
 ```
 
 ```
-## 入会开卡
+## 2、全民抢京豆
+export qjd_zlzh=['Your JD_User', '买买买', '东哥']
+```
+
+```
+## 3、签到领现金助力
+### 入口：App搜索领现金
+### 设置被助力的账号可填用户名 或 pin的值 不要;
+export cash_zlzh = ['Your JD_User', '买买买']
+```
+
+```
+## 4、京喜工厂开团助力 for python
+### 设置开团的账号可填用户名 或 pin的值 不要;
+### jxgc_kaituan = ['用户1','用户2']
+export jxgc_kaituan = []
+### 京喜UA
+export UserAgent = ''
+```
+
+```
+## 5、入会开卡
 ### int，入会送豆满足此值，否则不入会
 export openCardBean="30"
 ### 布尔值，是否记录符合条件的shopid(默认True)
@@ -378,11 +410,11 @@ export isRemoteSid="true"
 ```
 
 ```
-## 东东超市商品兑换
-### 您的ck格式：pt_key=xxx;pt_pin=xxx; (多账号&分隔)
-export cookies=""
-### 【填写您要兑换的商品】
-export coinToBeans="京豆包"
+## 6、东东超市商品兑换
+### 填写商品名字，兼容模糊关键词
+export coinToBeans='京豆包'
+### 多账号并发，默认关闭
+export blueCoin_Cc='False'
 ### 轮次
 export startMaxNum="30"
 ### 多线程并发，相当于每秒点击兑换次数...适当调整，手机会发烫
@@ -393,34 +425,21 @@ export starttime="23:59:59.00000000"
 export endtime="00:00:30.00000000"
 ```
 
-```
-## 抢京豆
-### ck 优先读取【JDCookies.txt】 文件内的ck  再到 ENV的 变量 JD_COOKIE='ck1&ck2' 最后才到脚本内 cookies=ck
-export qjd_zlzh=['Your JD_User', '买买买', '东哥']
-```
-
-```
-## 签到领现金助力
-### 入口：App搜索领现金
-### 设置被助力的账号可填用户名 或 pin的值;
-export cash_zlzh = ['Your JD_User', '买买买']
-```
-
 
 ## Wenmoux 部分环境变量
 
 ``` 
-## QQ星系牧场自动兑换20豆
+## 1、QQ星系牧场自动兑换20豆
 export Cowexchange="true"
 ```
 
 ```
-## 欧洲狂欢杯兑换兑换豆子，填38豆子，填39e卡
+## 2、欧洲狂欢杯兑换兑换豆子，填38豆子，填39e卡
 export Cupexid="39"
 ```
 
 ```
-## 10秒阅读
+## 3、10秒阅读
 export Readck="" ##自己CK
 export Read10UA="" ##自己设备UA
 export jrpush="" ##填true推送消息，默认不推送
@@ -430,17 +449,17 @@ export jrpush="" ##填true推送消息，默认不推送
 ## smiek2221 环境变量
 
 ```
-## 燃动夏季—入会
+## 1、燃动夏季—入会
 export summer_movement_joinjoinjoinhui="false" ##是否入会 true 入会，false 不入会
 ```
 
 ```
-## 燃动夏季—百元守卫战SH
+## 2、燃动夏季—百元守卫战SH
 export summer_movement_ShHelpFlag="1" ##0 不开启也不助力 1 开启并助力 2 开启但不助力 默认开启并助力
 ```
 
 ```
-## 燃动夏季-新增只做邀请助力功能
+## 3、燃动夏季-新增只做邀请助力功能
 export summer_movement_HelpHelpHelpFlag="false" ##是否只执行邀请助力 true 是 false 不是 默认 false
 ### 可以设置13点执行一下脚本
 if [ $(date "+%H") -eq 13 ]; then
@@ -448,11 +467,38 @@ if [ $(date "+%H") -eq 13 ]; then
 fi
 ```
 
+```
+## 4、京东签到图形验证修改火爆问题
+### 如果 read ECONNRESET 错误 可以试试
+### 环境变量 JOY_HOST 修改域名 https://jdjoy.jd.com 可以改成ip https://49.7.27.236
+### 如果上面ip不行就自己去ping下域名对应的ip cmd窗口输入—>ping jdjoy.jd.com 再改
+### 不要频繁请求 请过个半小时 1小时在执行
+export JOY_HOST=""
+```
+
+```
+## 5、图形验证文件 JDJRValidator_Pure.js 验证次数
+### 新增验证次数上限 默认25次 验证可能无法成功
+export JDJR_validator_Count="25"
+```
+
+```
+## 6、财富大陆热气球接客次数
+### 新增热气球接客 默认每次运行执行10次
+export gua_wealth_island_serviceNum="10"
+```
+
+```
+## 7、燃动夏季-新增屏蔽账号
+### export summer_movement_outuserID="2,5,7" ##屏蔽第几个账号的例子
+export summer_movement_outuserID=""
+```
+
 
 ## cdle 环境变量
 
 ```
-## 签到领现金兑换
+## 1、签到领现金兑换
 ### 需要填写exchangeAccounts参数，兑换多少取决于app内显示，默认为所有账号兑换10红包，部分账号会出现参数错误的提示。
 ### 填写 pt_pin@金额，pt_pin为用户名，可以在 COOKIES 中提取；金额为 2 或 10，例如 LiLei@2 或 HanMeimei@10。多值用 & 连接，例如 LiLei@2&HanMeimei@10
 export exchangeAccounts="pt_pin1@2"  ##抢2元红包
@@ -460,67 +506,169 @@ export exchangeAccounts="pt_pin1@2"  ##抢2元红包
 ```
 
 ```
-## 全民运动会守卫红包
+## 2、全民运动会守卫红包
 ### 助力码，需手动抓包
 export olympicgames_inviteId=""
 ```
 
 ```
-## 愤怒的锦鲤
+## 3、愤怒的锦鲤
 ### 高速并发请求，专治偷助力。在kois环境变量中填入需要助力的pt_pin，有多个请用@符号连接
 export kois="pt_pin1@pt_pin2"
 ```
 
+```
+## 4、真·抢京豆
+### 高速并发抢京豆，专治偷助力。设置环境变量angryBeanPins为指定账号助力，默认不助力。环境变量angryBeanMode可选值priority和speed，默认speed模式。
+export angryBeanPins="pt_pin1@pt_pin2"
+export angryBeanMode="speed"
+```
 
-## 通知类环境变量
+
+## star261 环境变量
 
 ```
-## 1. ServerChan
+## 1、京喜工厂开团
+### 默认第一个CK开团，例：若OPEN_DREAMFACTORY_TUAN="2,3"，则第2，第3个CK开团，其他账号参加第2，第3个CK开的团。每执行一次，会领取上一次成团的奖励和新开一次团，每天执行4次能开完3次团和领取3次团的奖励。一个账号能参团一次，一个账号一天能开三次团，请根据自己的情况设置需要开团的CK，一般至少5个CK能成团
+### 助力规则：开团账号开团，其他账号自动参团。 例：有A,B,C账号，A，B账号开团，则B，C会参加A的团，A会参加B的团。账号内互助之后，开团账号若有剩下参团次数，会尝试加入作者团
+### 成团条件：成团所需人数根据活动所需人数变化，一般为5-7人，若5人成团，则5个CK能成团一次，9个CK能成团两次，13个CK能成团三次
+export OPEN_DREAMFACTORY_TUAN=""
+```
+
+```
+## 2、燃动夏季
+### 会助力作者百元守卫战 参数helpAuthorFlag 默认助力
+### 百元守卫战,先脚本内互助，多的助力会助力作者
+export helpAuthorFlag="true" ##是否助力作者SH true 助力，false 不助力
+```
+
+```
+## 3、燃动夏季下注
+### 每个奖品会花费200币下注，不想下注的人不要跑
+### 若想下满注则设置环境变量 MAX_BET=true 前提：需要账号已经开通店铺会员
+### 每日20点开奖，脚本会自动开奖
+export MAX_BET="true"
+```
+
+
+## JDHelloWorld 环境变量
+
+```
+## 1、宠汪汪二代目
+### 默认80，10、20、40、80可选
+export feedNum="80"
+### 默认双人跑
+export JD_JOY_teamLevel="2"
+```
+
+```
+## 2、新版京喜财富岛提现
+### 提现金额，可选0.1 0.5 1 2 10
+export CFD_CASHOUT_MONEY=10
+### token，顺序、数量必须与cookie一致。抓包地址：https://m.jingxi.com/jxbfd/user/ExchangePrize
+### export CFD_CASH_TOKEN='[{"strPgtimestamp":"你的值","strPhoneID":"你的值","strPgUUNum":"你的值"},{"strPgtimestamp":"你的值","strPhoneID":"你的值","strPgUUNum":"你的值"}]'
+export CFD_CASH_TOKEN='[{"strPgtimestamp":"1626623544085","strPhoneID":"878e21db65d2d606","strPgUUNum":"56eaaf98f7d7a69c59e50c6bb40e79c1"}]'
+```
+
+```
+## 3、宠汪汪等提示预存验证码数量不足
+export validate_num="" ##你需要的数值
+```
+
+
+## Aaron-lv 环境变量
+
+```
+## 1、京东健康社区京豆兑换
+export JD_HEALTH_REWARD_NAME="20" ##只能兑换京豆，填写纯数字20 10 5 3
+```
+
+
+## 通知环境变量
+
+```
+## 1. Server酱
+## https://sct.ftqq.com
+## 下方填写 SCHKEY 值或 SendKey 值
 export PUSH_KEY=""
 ```
 
 ```
 ## 2. BARK
+## 下方填写app提供的设备码，例如：https://api.day.app/123 那么此处的设备码就是123
 export BARK_PUSH=""
+## 下方填写推送声音设置，例如choo，具体值请在bark-推送铃声-查看所有铃声
 export BARK_SOUND=""
+## 下方填写推送消息分组，默认为"QingLong"
+export BARK_GROUP="QingLong"
 ```
 
 ```
-## 3. Telegram
+## 3. Telegram 
+## 下方填写自己申请@BotFather的Token，如10xxx4:AAFcqxxxxgER5uw
 export TG_BOT_TOKEN=""
+## 下方填写 @getuseridbot 中获取到的纯数字ID
 export TG_USER_ID=""
+## Telegram 代理IP（选填）
+## 下方填写代理IP地址，代理类型为 http，比如您代理是 http://127.0.0.1:1080，则填写 "127.0.0.1"
+## 如需使用，请自行解除下一行的注释
+export TG_PROXY_HOST=""
+## Telegram 代理端口（选填）
+## 下方填写代理端口号，代理类型为 http，比如您代理是 http://127.0.0.1:1080，则填写 "1080"
+## 如需使用，请自行解除下一行的注释
+export TG_PROXY_PORT=""
+## Telegram 代理的认证参数（选填）
+export TG_PROXY_AUTH=""
+## Telegram api自建反向代理地址（选填）
+## 教程：https://www.hostloc.com/thread-805441-1-1.html
+## 如反向代理地址 http://aaa.bbb.ccc 则填写 aaa.bbb.ccc
+## 如需使用，请赋值代理地址链接，并自行解除下一行的注释
+export TG_API_HOST=""
 ```
 
 ```
 ## 4. 钉钉
+## 官方文档：https://developers.dingtalk.com/document/app/custom-robot-access
+## 下方填写token后面的内容，只需 https://oapi.dingtalk.com/robot/send?access_token=XXX 等于=符号后面的XXX即可
 export DD_BOT_TOKEN=""
 export DD_BOT_SECRET=""
 ```
 
 ```
-## 5. iGot聚合推送。
-export IGOT_PUSH_KEY=""
-```
-
-```
-## 6. Push Plus
-export PUSH_PLUS_TOKEN=""
-export PUSH_PLUS_USER=""
-```
-
-```
-## 7. 企业微信机器人消息推送 webhook 后面的 key
+## 5. 企业微信机器人
+## 官方说明文档：https://work.weixin.qq.com/api/doc/90000/90136/91770
+## 下方填写密钥，企业微信推送 webhook 后面的 key
 export QYWX_KEY=""
 ```
 
 ```
-## 8. 企业微信应用消息推送的值
+## 6. 企业微信应用
+## 参考文档：http://note.youdao.com/s/HMiudGkb
+## 下方填写素材库图片id（corpid,corpsecret,touser,agentid），素材库图片填0为图文消息, 填1为纯文本消息
 export QYWX_AM=""
 ```
 
 ```
+## 7. iGot聚合
+## 参考文档：https://wahao.github.io/Bark-MP-helper
+## 下方填写iGot的推送key，支持多方式推送，确保消息可达
+export IGOT_PUSH_KEY=""
+```
+
+```
+## 8. Push Plus
+## 官方网站：http://www.pushplus.plus
+## 下方填写您的Token，微信扫码登录后一对一推送或一对多推送下面的token，只填 PUSH_PLUS_TOKEN 默认为一对一推送
+export PUSH_PLUS_TOKEN=""
+## 一对一多推送（选填）
+## 下方填写您的一对多推送的 "群组编码" ，（一对多推送下面->您的群组(如无则新建)->群组编码）
+## 1. 需订阅者扫描二维码 2、如果您是创建群组所属人，也需点击“查看二维码”扫描绑定，否则不能接受群组消息推送
+export PUSH_PLUS_USER=""
+```
+
+```
 ## 9. go-cqhttp
-## gobot_url 推送到个人QQ: http://127.0.0.1/send_private_msg  群：http://127.0.0.1/send_group_msg
+## gobot_url 推送到个人QQ: http://127.0.0.1/send_private_msg  群：http://127.0.0.1/send_group_msg 
 ## gobot_token 填写在go-cqhttp文件设置的访问密钥
 ## gobot_qq 如果GOBOT_URL设置 /send_private_msg 则需要填入 user_id=个人QQ 相反如果是 /send_group_msg 则需要填入 group_id=QQ群 
 ## go-cqhttp相关API https://docs.go-cqhttp.org/api

@@ -13,7 +13,7 @@ task_before_shell_path=$dir_shell/task_before.sh
 if [ ! -a "$config_shell_path" ]; then
     touch $config_shell_path
 fi
-curl -s --connect-timeout 3 https://ghproxy.com/https://raw.githubusercontent.com/Oreomeow/VIP/main/Conf/Qinglong/config.sample.sh > $config_shell_path
+curl -s --connect-timeout 3 https://raw.githubusercontent.com/Oreomeow/VIP/main/Conf/Qinglong/config.sample.sh > $config_shell_path
 cp $config_shell_path $dir_shell/config.sh
 
 # 判断是否下载成功
@@ -28,7 +28,7 @@ fi
 if [ ! -a "$extra_shell_path" ]; then
     touch $extra_shell_path
 fi
-curl -s --connect-timeout 3 https://ghproxy.com/https://raw.githubusercontent.com/Oreomeow/VIP/main/Tasks/qlrepo/extra.sh > $extra_shell_path
+curl -s --connect-timeout 3 https://raw.githubusercontent.com/Oreomeow/VIP/main/Tasks/qlrepo/extra.sh > $extra_shell_path
 cp $extra_shell_path $dir_shell/extra.sh
 
 # 判断是否下载成功
@@ -45,7 +45,7 @@ chmod 755 $extra_shell_path
 echo -e "（1）panghu999\n（2）JDHelloWorld\n（3）he1pu\n（4）shufflewzc"
 echo -n "输入你想拉取的仓库编号(默认为 4):"
 read -r defaultNum
-defualtNum=${defaultNum:-'4'}
+defaultNum=${defaultNum:-'4'}
 sed -i "s/\$default4/\$default$defaultNum/g" $extra_shell_path
 
 # 将 extra.sh 添加到定时任务
@@ -61,7 +61,7 @@ fi
 if [ ! -a "$code_shell_path" ]; then
     touch $code_shell_path
 fi
-curl -s --connect-timeout 3 https://ghproxy.com/https://raw.githubusercontent.com/Oreomeow/VIP/main/Scripts/sh/Helpcode2.8/code.sh > $code_shell_path
+curl -s --connect-timeout 3 https://raw.githubusercontent.com/Oreomeow/VIP/main/Scripts/sh/Helpcode2.8/code.sh > $code_shell_path
 cp $code_shell_path $dir_shell/code.sh
 
 # 判断是否下载成功
@@ -91,7 +91,7 @@ fi
 
 
 # 下载 task_before.sh
-curl -s --connect-timeout 3 https://ghproxy.com/https://raw.githubusercontent.com/Oreomeow/VIP/main/Scripts/sh/Helpcode2.8/task_before.sh > $task_before_shell_path
+curl -s --connect-timeout 3 https://raw.githubusercontent.com/Oreomeow/VIP/main/Scripts/sh/Helpcode2.8/task_before.sh > $task_before_shell_path
 
 # 判断是否下载成功
 task_before_size=$(ls -l $task_before_shell_path | awk '{print $5}')

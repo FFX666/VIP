@@ -15,36 +15,40 @@ ql raw <fileurl>
   
   1. `JDHelloWorld`
   ```
-  ql repo https://github.com/JDHelloWorld/jd_scripts.git "jd_|jx_|getJDCookie" "activity|backUp|Coupon|enen|update" "^jd[^_]|USER"
+  ql repo https://github.com/JDHelloWorld/jd_scripts.git "jd_|jx_|getJDCookie" "activity|backUp|Coupon|enen|update" "^jd[^_]|USER|^TS|utils|package"
   ```
   2. `he1pu`（自动提交助力码-京喜工厂、种豆得豆、东东工厂、东东农场、健康社区、京喜财富岛、东东萌宠、闪购盲盒，随机从数据库中选取助力码互助）
   ```
-  ql repo https://github.com/he1pu/JDHelp.git "jd_|jx_|getJDCookie" "activity|backUp|Coupon|update" "^jd[^_]|USER|MovementFaker|JDJRValidator_Pure|sign_graphics_validate|ZooFaker_Necklace"
+  ql repo https://github.com/he1pu/JDHelp.git "jd_|jx_|getJDCookie" "activity|backUp|Coupon|update" "^jd[^_]|USER|utils|^MovementFaker|^JDJRValidator|^sign|^ZooFaker"
   ```
   3. `shufflewzc`
   ```
-  ql repo https://ghproxy.com/https://github.com/shufflewzc/faker2.git "jd_|jx_|getJDCookie" "activity|backUp" "^jd[^_]|USER|ZooFaker_Necklace|JDJRValidator_Pure"
+  ql repo https://github.com/shufflewzc/faker2.git "jd_|jx_|jddj_|getJDCookie" "activity|backUp|Coupon|update" "^jd[^_]|USER|utils|^ZooFaker|^JDJRValidator|^sign"
   ```
-  4. `panghu999`
+  4. `Aaron-lv`
+  ```
+  ql repo https://github.com/Aaron-lv/sync.git "jd_|jx_|getJDCookie" "activity|backUp|Coupon" "^jd[^_]|USER|utils" "jd_scripts"
+  ```
+  5. `panghu999`（无维护）
   ```
   ql repo https://github.com/panghu999/jd_scripts.git "jd_|jx_|getJDCookie" "activity|backUp|Coupon|jd_try|format_" "^jd[^_]|USER"
   ```
-  5. `chinnkarahoi`
+  6. `chinnkarahoi`（无维护）
   ```
   ql repo https://github.com/chinnkarahoi/jd_scripts.git "jd_|jx_|getJDCookie" "activity|backUp|Coupon" "^jd[^_]|USER"
   ```
 
 - `passerby-b`
 ```
-ql repo https://github.com/passerby-b/JDDJ.git "jddj_" "scf_test_event" "jddj_cookie"
+ql repo https://github.com/passerby-b/JDDJ.git "jddj_" "scf_test_event|jddj_fruit_code.js|jddj_getck.js|jd_|jddj_cookie"
 ```
 - `curtinlv`
 ```
-ql repo https://github.com/curtinlv/JD-Script.git
+ql repo https://github.com/curtinlv/JD-Script.git "jd_"
 ```
 - `smiek2221`
 ```
-ql repo https://github.com/smiek2221/scripts.git "jd_|gua_" "" "ZooFaker_Necklace.js|JDJRValidator_Pure.js|sign_graphics_validate.js"
+ql repo https://github.com/smiek2221/scripts.git "jd_|gua_" "" "^ZooFaker|^JDJRValidator|^sign"
 ```
 - `cdle`
 ```
@@ -80,25 +84,17 @@ ql repo https://github.com/panghu999/panghu.git "jd_"
 ```
 - `star261`
 ```
-ql repo https://github.com/star261/jd.git "jd_|star" "" "^MovementFaker"
+ql repo https://github.com/star261/jd.git "jd_|star" "" "MovementFaker"
 ```
 - `Wenmoux`
 ```
 ql repo https://github.com/Wenmoux/scripts.git "other|jd" "" "" "wen"
-```
-- `Aaron-lv`
-```
-ql repo https://github.com/Aaron-lv/sync.git "jd_|jx_|getJDCookie" "activity|backUp|Coupon" "^jd[^_]|USER" "jd_scripts"
 ```
 
 ## 单脚本
 ### 名称之后标注`﹢`的单脚本，若上面已拉取仓库的可以不拉，否则会重复拉取。这里适用于只拉取部分脚本使用
 > `curtinlv`﹢
 
->> 抢京豆
-```
-ql raw https://raw.githubusercontent.com/Oreomeow/JD-Script/main/jd_qjd.py
-```
 >> 入会
 ```
 ql raw https://raw.githubusercontent.com/curtinlv/JD-Script/main/OpenCard/jd_OpenCard.py

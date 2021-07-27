@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#Build 20210712-003
+## Build 20210722-001
 
 ## 导入通用变量与函数
 dir_shell=/ql/shell
@@ -14,7 +14,8 @@ repo2='JDHelloWorld_jd_scripts'                    #预设的 JDHelloWorld 仓�
 repo3='he1pu_JDHelp'                               #预设的 he1pu 仓库
 repo4='shufflewzc_faker2'                          #预设的 shufflewzc 仓库
 repo5='Wenmoux_scripts_wen_chinnkarahoi'           #预设的 Wenmoux 仓库，用于读取口袋书店互助码。需提前拉取温某人的仓库或口袋书店脚本并完整运行。
-repo=$repo1                                        #默认调用 panghu999 仓库脚本日志
+repo6='Aaron-lv_sync_jd_scripts'                   #预设的 Aaron-lv 仓库
+repo=$repo4                                        #默认调用 shufflewzc 仓库脚本日志
 
 ## 调试模式开关，默认是0，表示关闭；设置为1，表示开启
 DEBUG="1"
@@ -70,6 +71,11 @@ BreakHelpNum="4 9-14 15~18 19_21"  ## 屏蔽账号序号或序号区间
 ## 定义是否自动更新配置文件中的互助码和互助规则，默认为1，表示更新；留空或其他数值表示不更新。
 UpdateType="1"
 
+## 定义是否自动安装或修复缺失的依赖，默认为1，表示自动修复；留空或其他数值表示不修复。
+FixDependType="1"
+## 定义监控修复的依赖名称
+package_name="canvas png-js date-fns axios crypto-js ts-md5 tslib @types/node dotenv typescript fs require tslib"
+
 ## 需组合的环境变量列表，env_name需要和var_name一一对应，如何有新活动按照格式添加(不懂勿动)
 env_name=(
   FRUITSHARECODES
@@ -87,7 +93,7 @@ env_name=(
   JDHEALTH_SHARECODES
   JD818_SHARECODES
   CITY_SHARECODES
-  JXNCTOKENS
+  MONEYTREE_SHARECODES
 )
 var_name=(
   ForOtherFruit
@@ -105,6 +111,7 @@ var_name=(
   ForOtherHealth
   ForOtherCarni
   ForOtherCity
+  ForOtherMoneyTree
 )
 
 ## name_js为脚本文件名，如果使用ql repo命令拉取，文件名含有作者名
@@ -119,13 +126,14 @@ name_js=(
   "$repo"_jd_crazy_joy
   "$repo"_jd_jdzz
   "$repo"_jd_jxnc
-  "$repo5"_jd_bookshop
+  "$repo"_jd_bookshop
   "$repo"_jd_cash
   "$repo"_jd_sgmh
-  "$repo"_jd_cfd
+  "$repo6"_jd_cfd
   "$repo"_jd_health
   "$repo"_jd_carnivalcity
   "$repo"_jd_city
+  "$repo4"_jd_moneyTree_heip
 )
 
 name_config=(
@@ -144,6 +152,7 @@ name_config=(
   Health
   Carni
   City
+  MoneyTree
 )
 
 name_chinese=(
@@ -162,11 +171,12 @@ name_chinese=(
   东东健康社区
   京东手机狂欢城
   城城领现金
+  摇钱树
 )
 
 #仅输出互助码的环境变量
 name_js_only=(
-  "$repo"_jd_cfd
+  "$repo6"_jd_cfd
 )
 
 name_config_only=(
@@ -199,7 +209,7 @@ export_codes_sub() {
     local BreakHelpInterval=$(echo $BreakHelpNum | perl -pe "{s|~|-|; s|_|-|}" | sed 's/\(\d\+\)-\(\d\+\)/{\1..\2}/g')
     local BreakHelpNumArray=($(eval echo $BreakHelpInterval))
     local BreakHelpNumVerify=$(echo $BreakHelpNum | sed 's/ //g' | perl -pe "{s|-||; s|~||; s|_||}" | sed 's/^\d\+$//g')
-    local i j k m n t pt_pin_in_log code tmp_grep tmp_my_code tmp_for_other user_num random_num_list
+    local i j k m n t pt_pin_in_log code tmp_grep tmp_my_code tmp_for_other user_num tmp_helptype HelpTemp random_num_list
     local envs=$(eval echo "\$JD_COOKIE")
     local array=($(echo $envs | sed 's/&/ /g'))
     local user_sum=${#array[*]}
@@ -242,7 +252,7 @@ export_codes_sub() {
                 tmp_for_other=""
                 for ((m = 0; m < ${#pt_pin[*]}; m++)); do
                     j=$((m + 1))
-                    if [ $BreakHelpType = 1 ]; then
+                    if [[ $BreakHelpType = "1" ]]; then
                         if [ "$BreakHelpNumVerify" = "" ]; then
                             for ((t = 0; t < ${#BreakHelpNumArray[*]}; t++)); do
                                 [[ "${BreakHelpNumArray[t]}" = "$j" ]] && continue 2
@@ -276,7 +286,7 @@ export_codes_sub() {
                         else
                             k=$((n + 1 - $user_sum))
                         fi
-                        if [ $BreakHelpType = 1 ]; then
+                        if [[ $BreakHelpType = "1" ]]; then
                             if [ "$BreakHelpNumVerify" = "" ]; then
                                 for ((t = 0; t < ${#BreakHelpNumArray[*]}; t++)); do
                                     [[ "${BreakHelpNumArray[t]}" = "$k" ]] && continue 2
@@ -303,7 +313,7 @@ export_codes_sub() {
                     j=$((m + 1))
                     for n in $random_num_list; do
                         [[ $j -eq $n ]] && continue
-                        if [ $BreakHelpType = 1 ]; then
+                        if [[ $BreakHelpType = "1" ]]; then
                             if [ "$BreakHelpNumVerify" = "" ]; then
                                 for ((t = 0; t < ${#BreakHelpNumArray[*]}; t++)); do
                                     [[ "${BreakHelpNumArray[t]}" = "$n" ]] && continue 2
@@ -330,7 +340,7 @@ export_codes_sub() {
                     for ((n = 0; n < ${#pt_pin[*]}; n++)); do
                         [[ $m -eq $n ]] && continue
                         k=$((n + 1))
-                        if [ $BreakHelpType = 1 ]; then
+                        if [[ $BreakHelpType = "1" ]]; then
                             if [ "$BreakHelpNumVerify" = "" ]; then
                                 for ((t = 0; t < ${#BreakHelpNumArray[*]}; t++)); do
                                     [[ "${BreakHelpNumArray[t]}" = "$k" ]] && continue 2
@@ -362,7 +372,7 @@ export_all_codes() {
     [[ $DEBUG = "1" ]] && echo -e "\n#$cur_time 预设的 JD_COOKIE 环境变量数量：`echo $JD_COOKIE | sed 's/&/\n/g' | wc -l`"
     [[ $DEBUG = "1" && "$(echo $JD_COOKIE | sed 's/&/\n/g' | wc -l)" = "1" && "$(echo $JD_COOKIE | grep -o 'pt_key' | wc -l)" -gt 1 ]] && echo -e "\n#$cur_time 检测到您将多个 COOKIES 填写到单个环境变量值，请注意将各 COOKIES 采用 & 分隔，否则将无法完整输出互助码及互助规则！"
     echo -e "\n#$cur_time 从日志提取互助码，编号和配置文件中Cookie编号完全对应，如果为空就是所有日志中都没有。\n\n#$cur_time 即使某个MyXxx变量未赋值，也可以将其变量名填在ForOtherXxx中，jtask脚本会自动过滤空值。\n"
-    if [ $DiyHelpType = "1" ]; then
+    if [[ $DiyHelpType = "1" ]]; then
         echo -e "#$cur_time 您已启用指定活动采用指定互助模板功能！"
     else
         echo -n "#$cur_time 您选择的互助码模板为："
@@ -381,7 +391,7 @@ export_all_codes() {
             ;;
         esac
     fi
-    [[ $BreakHelpType = 1 ]] && echo -e "\n#$cur_time 您已启用屏蔽模式，账号 $BreakHelpNum 将不被助力！"
+    [[ $BreakHelpType = "1" ]] && echo -e "\n#$cur_time 您已启用屏蔽模式，账号 $BreakHelpNum 将不被助力！"
     if [ "$ps_num" -gt 7 ]; then
         echo -e "\n#$cur_time 检测到 code.sh 的线程过多 ，请稍后再试！"
         exit
@@ -434,8 +444,10 @@ for ((i=1; i<=100; i++)); do
                 fi
 #            fi
         fi
-    elif [[ $i -gt $user_sum ]] && [[ ! -z "$(cat $file_task_before | grep "^$config_name_my$i")" ]]; then
+    elif [[ $i -gt $user_sum ]] && [[ $i -gt 1 ]] && [[ ! -z "$(cat $file_task_before | grep "^$config_name_my$i")" ]]; then
         sed -i "/^$config_name_my$i/d" $file_task_before
+    elif [[ $i -eq 1 ]] && [[ ! -z "$(cat $file_task_before | grep "^$config_name_my$i")" ]]; then
+        sed -i "s/^$config_name_my$i='\S*'$/$config_name_my$i=''/" $file_task_before
     fi
 done
 
@@ -453,8 +465,10 @@ for ((j=1; j<=100; j++)); do
         if [ "$new_rule" != "$old_rule" ]; then
             sed -i "s/^$config_name_for_other$j=\"$old_rule\"$/$config_name_for_other$j=\"$new_rule\"/" $file_task_before
         fi
-    elif [[ $j -gt $user_sum ]] && [[ ! -z "$(cat $file_task_before | grep "^$config_name_for_other$j")" ]]; then
+    elif [[ $j -gt $user_sum ]] && [[ $j -gt 1 ]] && [[ ! -z "$(cat $file_task_before | grep "^$config_name_for_other$j")" ]]; then
         sed -i "/^$config_name_for_other$j/d" $file_task_before
+    elif [[ $j -eq 1 ]] && [[ ! -z "$(cat $file_task_before | grep "^$config_name_for_other$j")" ]]; then
+        sed -i "s/^$config_name_for_other$j=\"\S*\"$/$config_name_for_other$j=\"\"/" $file_task_before
     fi
 done
 }
@@ -484,17 +498,19 @@ for ((k=1; k<=100; k++)); do
                 sed -i "s/^$config_name$k='$old_code'$/$config_name$k='$new_code'/" $file_task_before
             fi
         fi
-    elif [[ $k -gt $user_sum ]] && [[ ! -z "$(cat $file_task_before | grep "^$config_name$k")" ]]; then
+    elif [[ $k -gt $user_sum ]] && [[ $k -gt 1 ]] && [[ ! -z "$(cat $file_task_before | grep "^$config_name$k")" ]]; then
         sed -i "/^$config_name$k/d" $file_task_before
+    elif [[ $k -eq 1 ]] && [[ ! -z "$(cat $file_task_before | grep "^$config_name$k")" ]]; then
+        sed -i "s/^$config_name$k='\S*'$/$config_name$k=''/" $file_task_before
     fi
 done
 }
 
 export_codes_sub_only(){
-if [ "$(cat $dir_scripts/"$repo"_jd_cfd.js | grep "// console.log(\`token")" != "" ]; then
-    echo -e "\n# 正在修改 "$repo"_jd_cfd.js ，待完全运行 "$repo"_jd_cfd.js 后即可输出 token ！"
-fi
-sed -i 's/.*\(c.*log\).*\(${JSON.*token)}\).*/      \1(\`\\n【京东账号${$.index}（${$.UserName}）的京喜token好友互助码】\2\\n\`)/g' /ql/scripts/*_jd_cfd.js
+    if [ "$(cat $dir_scripts/"$repo"_jd_cfd.js | grep "// console.log(\`token")" != "" ]; then
+        echo -e "\n# 正在修改 "$repo"_jd_cfd.js ，待完全运行 "$repo"_jd_cfd.js 后即可输出 token ！"
+    fi
+    sed -i 's/.*\(c.*log\).*\(${JSON.*token)}\).*/      \1(\`\\n【京东账号${$.index}（${$.UserName}）的京喜token好友互助码】\2\\n\`)/g' /ql/scripts/*_jd_cfd.js
     local task_name=$1
     local config_name=$2
     local chinese_name=$3
@@ -577,21 +593,87 @@ backup_del(){
 [[ $CLEANBAK = "1" ]] && find $dir_config/bak/ -type f -mtime +$CLEANBAK_DAYS | xargs rm -rvf
 }
 
+install_dependencies_normal(){
+    for i in $@; do
+        case $i in
+            canvas)
+                cd /ql/scripts
+                if [[ "$(npm ls $i)" =~ (empty) ]]; then
+                    if [[ "echo $(npm ls $i) | grep ERR" != "" ]]; then
+                        npm uninstall $i
+                    fi
+                    apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && npm i $i --prefix /ql/scripts --build-from-source
+                fi
+                ;;
+            typescript)
+                if [[ "$(npm ls $i -g)" =~ (empty) ]]; then
+                    if [[ "echo $(npm ls $i -g) | grep ERR" != "" ]]; then
+                        npm uninstall $i
+                    fi
+                    npm i $i -g --force
+                fi
+                ;;
+            *)
+                if [[ "$(npm ls $i -g)" =~ (empty) ]]; then
+                    if [[ "echo $(npm ls $i -g) | grep ERR" != "" ]]; then
+                        npm uninstall $i
+                    fi
+                    npm i $i -g
+                fi
+                ;;
+        esac
+    done
+}
+
+install_dependencies_force(){
+    for i in $@; do
+        case $i in
+            canvas)
+                cd /ql/scripts
+                if [[ "$(npm ls $i)" =~ (empty) ]]; then
+                    if [[ "$(npm ls $i)" =~ $i ]] || [[ "echo $(npm ls $i) | grep ERR" != "" ]]; then
+                        npm uninstall $i
+                    fi
+                    rm -rf /ql/scripts/node_modules/$i
+                    rm -rf /usr/local/lib/node_modules/lodash/*
+                    apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && npm i $i --prefix /ql/scripts --build-from-source --force
+                fi
+                ;;
+            *)
+                if [[ "$(npm ls $i -g)" =~ (empty) ]]; then
+                    if [[ "$(npm ls $i)" =~ $i ]] || [[ "$(npm ls $i -g)" =~ $i ]] || [[ "echo $(npm ls $i -g) | grep ERR" != "" ]]; then
+                        npm uninstall $i
+                    fi
+                    rm -rf /usr/local/lib/node_modules/$i
+                    rm -rf /usr/local/lib/node_modules/lodash/*
+                    npm i $i -g --force
+                fi
+                ;;
+        esac
+    done
+}
+
+install_dependencies_all(){
+    install_dependencies_normal $package_name
+    cd /ql/scripts
+    for i in $package_name; do
+        install_dependencies_force $i
+    done
+}
+
 
 ## 执行并写入日志
+[[ $FixDependType = "1" ]] && install_dependencies_all >/dev/null 2>&1 &
 today="$(date +%Y年%m月%d日)"
 cur_time="【$(date +%X)】"
 log_time=$(date "+%Y-%m-%d-%H-%M-%S")
 log_path="$dir_code/$log_time.log"
 make_dir "$dir_code"
 ps_num="$(ps | grep code.sh | grep -v grep | wc -l)"
-[[ ! -z "$(ps -ef|grep -w 'code.sh'|grep -v grep)" ]] && ps -ef|grep -w 'code.sh'|grep -v grep|awk '{print $3}'|xargs kill -9
+#[[ ! -z "$(ps -ef|grep -w 'code.sh'|grep -v grep)" ]] && ps -ef|grep -w 'code.sh'|grep -v grep|awk '{print $1}'|xargs kill -9
 export_all_codes | perl -pe "{s|京东种豆|种豆|; s|crazyJoy任务|疯狂的JOY|}" | tee $log_path
 sleep 5
 update_help
 
-## 修改curtinlv京东超市兑换脚本的参数
-sed -i "21c cookies='$(echo $JD_COOKIE | sed "s/&/ /g; s/\S*\(pt_key=\S\+;\)\S*\(pt_pin=\S\+;\)\S*/\1\2/g;" | perl -pe "s| |&|g")'" /ql/scripts/curtinlv_JD-Script_jd_blueCoin.py
-
 ## 修改curtinlv入会领豆配置文件的参数
-sed -i "4c JD_COOKIE = '$(echo $JD_COOKIE | sed "s/&/ /g; s/\S*\(pt_key=\S\+;\)\S*\(pt_pin=\S\+;\)\S*/\1\2/g;" | perl -pe "s| |&|g")'" /ql/repo/curtinlv_JD-Script/OpenCard/OpenCardConfig.ini
+[[ -f /ql/repo/curtinlv_JD-Script/OpenCard/OpenCardConfig.ini ]] && sed -i "4c JD_COOKIE = '$(echo $JD_COOKIE | sed "s/&/ /g; s/\S*\(pt_key=\S\+;\)\S*\(pt_pin=\S\+;\)\S*/\1\2/g;" | perl -pe "s| |&|g")'" /ql/repo/curtinlv_JD-Script/OpenCard/OpenCardConfig.ini
