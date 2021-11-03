@@ -80,7 +80,7 @@ docker_install() {
 }
 
 docker_install
-warn "降低学习成本，小白回车到底，一路默认选择"
+warn "Faker系列仓库一键安装配置，小白回车到底，一路默认选择"
 # 配置文件保存目录
 echo -n -e "\e[33m一、请输入配置文件保存的绝对路径（示例：/root)，回车默认为当前目录:\e[0m"
 read jd_path

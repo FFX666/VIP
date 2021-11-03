@@ -108,7 +108,7 @@ dl_extra_shell() {
 # extra.sh 设置区设置
 set_default_extra() {   
     echo -e "一、集成仓库 Shufflewzc-Faker2"
-    read -p "直接回车拉取Faker2仓库" CollectedRepo
+    read -p "直接回车拉取Faker2仓库，输入2回车拉取Faker3纯净仓库" CollectedRepo
     echo -e "二、其他仓库（Other Repositories）\n1-passerby-b\n2-curtinlv\n3-smiek2221\n4-cdle\n5-ZCY01\n6-whyour/hundun\n7-moposmall\n8-Ariszy (Zhiyi-N)\n9-photonmang\n10-jiulan\n12-star261\n13-Wenmoux\n14-Tsukasa007"
     read -p "输入您想拉取其他仓库编号(回车默认不拉取)，拉取多个请用空格隔开:" OtherRepo 
     CollectedRepo=${CollectedRepo:-"4"}
@@ -185,7 +185,7 @@ dl_code_shell() {
 # code.sh 预设仓库及默认调用仓库设置
 set_default_code() {
     echo -e "## 将\"repo=\$repo1\"改成\"repo=\$repo2\"或其他，以默认调用其他仓库脚本日志\nrepo1='panghu999_jd_scripts' #预设的 panghu999 仓库\nrepo2='JDHelloWorld_jd_scripts' #预设的 JDHelloWorld 仓库\nrepo3='he1pu_JDHelp' #预设的 he1pu 仓库\nrepo4='shufflewzc_faker2' #预设的 shufflewzc 仓库\nrepo6='Aaron-lv_sync_jd_scripts' #预设的 Aaron-lv 仓库\nrepoA='yuannian1112_jd_scripts' #预设的 yuannian1112 仓库\nrepo=\$repo1 #默认调用 panghu999 仓库脚本日志"
-    read -p "输入您想调用的仓库编号(默认为 4):" repoNum
+    read -p "回车直接配置Faker2仓库内部助力，输入1回车则配置Faker3纯净仓库内部助力:" repoNum
     repoNum=${repoNum:-'4'}
     sed -i "s/repo=\$repo[0-9]/repo=\$repo${repoNum}/g" $code_shell_path
     if [ "${repoNum}" = 'A' ]; then
