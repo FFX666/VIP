@@ -1,6 +1,6 @@
 ## Version: v2.8.0
-## Date: 2021-06-20
-## Mod: Build20210815-002
+## Date: 2021-11-11
+## Mod: Build20211111-001
 ## Update Content: 可持续发展纲要\n1. session管理破坏性修改\n2. 配置管理可编辑config下文件\n3. 自定义脚本改为查看脚本\n4. 移除互助相关
 
 ## 上面版本号中，如果第2位数字有变化，那么代表增加了新的参数，如果只有第3位数字有变化，仅代表更新了注释，没有增加新的参数，可更新可不更新
@@ -183,38 +183,6 @@ case $1 in
         ;;
 esac
 
-## 12. 组队环境变量
-### 环境变量填写要求较高，建议群组内确认填写结果
-scr_name="$1"                                 ## 不可删除
-case $1 in
-    *jd_sendBean* | *jd_sddd*)                ## 送豆得豆活动脚本关键词
-        teamer_num="11"                       ## 单个队伍中的总账号数为 11 个
-        team_num="1"                          ## 每个账号发起组队的最大队伍数为 1 个
-        ;;
-    *xmGame*)                                 ## 小米-星空大冒险活动脚本关键词
-        teamer_num="11"                       ## 单个队伍中的总账号数为 11 个
-        team_num="1"                          ## 每个账号发起组队的最大队伍数为 1 个
-        ;;
-    *jd_zdjr*)                                ## 组队瓜分京豆活动脚本关键词
-        teamer_num="5 5 5 5"                  ## 对应各个活动中单个队伍中的总账号数分别为 5 5 5 5 个
-        team_num="2 3 3 5"                    ## 对应各个活动中每个账号发起组队的最大队伍数为 2 3 3 5 个
-        activityId=(                          ## 活动 activityId；需手动抓包。按数组分行填写至括号内
-          54f071f4eb794092a872392696be7d8d
-          0582063f78434ed599becfc8f812c2ee
-          bbda11ba7a9644148d65c8b0b78f0bd2
-          92c03af2ce744f6f94de181ccee15e4f
-        )
-        activityUrl=(                         ## 活动 activityUrl；需手动抓包。按数组分行填写至括号内
-          https://cjhydz-isv.isvjcloud.com
-          https://lzkjdz-isv.isvjcloud.com
-          https://lzkjdz-isv.isvjcloud.com
-          https://cjhydz-isv.isvjcloud.com
-        )
-        ;;
-    *)                                        ## 不可删除
-        scr_name=""                           ## 不可删除
-        ;;                                    ## 不可删除
-esac
 
 ## 其他需要的变量，脚本中需要的变量使用 export 变量名= 声明即可
 
@@ -330,13 +298,6 @@ export JD_TRY_MIN_PRICE=""
 ### 试用商品最多提供数量（过滤垃圾商品）
 export JD_TRY_MAX_SUPPLY_COUNT=""
 
-# 龙猪猪环境变量
-## 京豆雨通知，填写true为不关闭推送，false为关闭推送
-export RAIN_NOTIFY_CONTROL="false"
-## 整点京豆雨RRA
-export SUPER_RAIN_RRA=""
-## 半点京豆雨RRA
-export HALF_RAIN_RRA=""
 
 # 柠檬（胖虎部分环境变量）
 ## 1、京喜工厂抢茅台
@@ -487,36 +448,7 @@ export summer_movement_outuserID=""
 ## 8、修复点点券
 ### 新增显示有多少个非法请求 可以开通知 
 export DDQ_NOTIFY_CONTROL="" ##不填或false为通知，true为不通知
-## 9、组队瓜分京豆活动变量
-export jd_zdjr_activityId=""
-export jd_zdjr_activityUrl=""
-## 10、奥运夺金牌开卡
-export guaolympicopencard="true"
-## 11、7.31-8.10 全民奥运 激情奔跑
-export guaolympicopencard2="true"
-## 12、8.4-8.12 大牌联合 冰爽一夏
-export guaopencard4="true" ##开卡
-export guaopencard_addSku4="true" ##加购物车
-## 13、8.5-8.12 冰爽夏日 钜惠送好礼
-export guaopencard5="true" ##开卡
-export guaopencard_addSku5="true" ##加购物车
-## 14、七夕告白季
-export guaopencard6="true" ##开卡
-export guaopencard_addSku6="true" ##加购物车
-## 15、8.8-8.14 七夕会员福利社
-export guaopencard7="true" ##开卡
-export guaopencard_addSku7="true" ##加购物车
-## 16、8.10-8.15 头号玩家 一起热8
-export guaopencard8="true" ##开卡
-export guaopencard_addSku8="true" ##加购物车
-## 17、8.11-8.15 星动七夕 纵享丝滑
-export guaopencard9="true" ##开卡
-export guaopencard_addSku9="true" ##加购物车
-## 18、8.11-8.18 大牌联合 约惠一夏
-export guaopencard10="true" ##开卡
-export guaopencard_addSku10="true" ##加购物车
-## 17开卡任务
-export guaopencardRun17="true" ##开卡任务
+
 ## 19-38、预备
 j=30
 for (( i = 11; i <= j; i++ )); do
@@ -557,36 +489,6 @@ export angryBeanPins="$(echo $JD_COOKIE | sed "s/&/ /g; s/\S*pt_pin=\([^;]\+\);\
 export angryBeanMode="priority"
 export enableAngryBeanNotify="true"
 
-# star261 环境变量
-## 1、京喜工厂开团
-### 默认第一个CK开团，例：若OPEN_DREAMFACTORY_TUAN="2,3"，则第2，第3个CK开团，其他账号参加第2，第3个CK开的团。每执行一次，会领取上一次成团的奖励和新开一次团，每天执行4次能开完3次团和领取3次团的奖励。一个账号能参团一次，一个账号一天能开三次团，请根据自己的情况设置需要开团的CK，一般至少5个CK能成团
-### 助力规则：开团账号开团，其他账号自动参团。 例：有A,B,C账号，A，B账号开团，则B，C会参加A的团，A会参加B的团。账号内互助之后，开团账号若有剩下参团次数，会尝试加入作者团
-### 成团条件：成团所需人数根据活动所需人数变化，一般为5-7人，若5人成团，则5个CK能成团一次，9个CK能成团两次，13个CK能成团三次
-export OPEN_DREAMFACTORY_TUAN=""
-## 2、燃动夏季
-### 会助力作者百元守卫战 参数helpAuthorFlag 默认助力
-### 百元守卫战,先脚本内互助，多的助力会助力作者
-export helpAuthorFlag="true" ##是否助力作者SH true 助力，false 不助力
-## 3、燃动夏季下注
-### 每个奖品会花费200币下注，不想下注的人不要跑
-### 若想下满注则设置环境变量 MAX_BET=true 前提：需要账号已经开通店铺会员
-### 每日20点开奖，脚本会自动开奖
-export MAX_BET="true"
-
-# JDHelloWorld 环境变量
-## 1、宠汪汪二代目
-### 默认80，10、20、40、80可选
-export feedNum="80"
-### 默认双人跑
-export JD_JOY_teamLevel="2"
-## 2、新版京喜财富岛提现
-### 提现金额，可选0.1 0.5 1 2 10
-export CFD_CASHOUT_MONEY=10
-### token，顺序、数量必须与cookie一致。抓包地址：https://m.jingxi.com/jxbfd/user/ExchangePrize
-### export CFD_CASH_TOKEN='[{"strPgtimestamp":"你的值","strPhoneID":"你的值","strPgUUNum":"你的值"},{"strPgtimestamp":"你的值","strPhoneID":"你的值","strPgUUNum":"你的值"}]'
-export CFD_CASH_TOKEN='[{"strPgtimestamp":"1626623544085","strPhoneID":"878e21db65d2d606","strPgUUNum":"56eaaf98f7d7a69c59e50c6bb40e79c1"}]'
-## 3、宠汪汪等提示预存验证码数量不足
-export validate_num="" ##你需要的数值
 
 # Aaron-lv 环境变量
 ## 1、京东健康社区京豆兑换
@@ -597,34 +499,3 @@ export JD_HEALTH_REWARD_NAME="20" ##只能兑换京豆，填写纯数字20 10 5 
 ### 使用 & 分隔，例如 东东乐园&东东萌宠
 export NOTIFY_SKIP_LIST=""
 
-# 不知名大佬环境变量
-## 1、清空购物车
-### 将需要跳过清理的账号(cookie中的pt_pin)放到变量CleanUsers中，多个用@隔开
-export CleanUsers=""
-
-# Tsukasa007 环境变量
-## 1、7.28-8.6 定格夺冠
-### 第一个账号助力Tsukasa007，其他依次助力CK1第一个CK失效应该全都会助力Tsukasa007，亲注意一下（其他脚本逻辑都差不多）
-### 一天只能领400豆1个ck20豆，不设置变量默认只会运行到ck21，填写11就是跑到11个ck就停止，填写21就是跑到21个ck就停止，如果没豆那就改变量，ck多每天改一次收益最大化
-export JD_OPENCARE_CHAMPIONSHIP=""
-## 2、7.28-8.9 夏日呵护 母音甄选	
-### 一天只能领100豆1个ck10豆，不设置变量默认只会运行到ck11，填写11就是跑到11个ck就停止，填写22就是跑到22个ck就停止，一天最多助力10个ck，推荐11的倍数填写！！如果11没豆那就22如此类推，每天改一次收益最大化
-export JD_SUMMER_MOM_OPENCARD=""
-## 3、7.29-8.9 奥运夺金挑战赛
-### 一天只能领200豆1个ck20豆，不设置变量默认只会运行到ck11，填写11就是跑到11个ck就停止，填写22就是跑到22个ck就停止，一天最多助力10个ck，推荐11的倍数填写！！每天改一次收益最大化
-export JD_OLYMPIC_WIN_GOLD=""
-## 4、7.26-8.8 全民奔跑 激扬奥运
-### env OLYMPIC_START_DRAW = true 就是开启ck1抽奖 (!!!抽奖时间可能很长，慢慢抽吧!!!)
-export OLYMPIC_START_DRAW="true"
-## 5、8.2-8.12 奶爸盛典 爸气全开
-### 填写11就是跑到11个ck就停止，填写21就是跑到21个ck就停止，一天最多助力20个ck 推荐10的倍数 +1 填写！！
-export JD_OPENCARD_DADDY=""
-## 6、8.4-8.12 大牌联合 冰爽一夏
-### 这个活动经过Tsukasa007的测试，邀请了38个ck，有18次20豆，所以有点随机不好判断一天有多少豆，默认21停，觉得自己牛逼，就改成 999 跑完算了！！
-export JD_OPENCARD_COOL_SUMMER="999"
-## 7、7.24-8.15 嗨皮一下 食力全开
-### 填写11就是跑到11个ck就停止，填写22就是跑到22个ck就停止，一天最多助力10个ck，推荐11的倍数填写！！如果11没豆那就22如此类推，每天改一次收益最大化
-export JD_OPENCARD_EAT_OPEN_OPENCARD=""
-## 8、8.5-8.12 大牌联合 冰爽一夏 钜惠送好礼
-### 填写11就是跑到11个ck就停止，填写21就是跑到21个ck就停止，一天最多助力20个ck，推荐10的倍数 +1 填写！！
-export JD_OPENCARD_COOL_SUMMER2=""
