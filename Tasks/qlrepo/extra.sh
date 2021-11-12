@@ -19,7 +19,7 @@
 
 
 #------ 设置区 ------#
-## 1. 拉取仓库编号设置，默认 shufflewzc 仓库
+## 1. 拉取仓库编号设置，默认 Faker2 仓库
 CollectedRepo=(4) ##示例：CollectedRepo=(2 4 6)
 OtherRepo=() ##示例：OtherRepo=(1 3)
 ## 2. 是否安装依赖和安装依赖包的名称设置
@@ -57,13 +57,13 @@ EOF
 #------ 代码区 ------#
 # 🌱拉取仓库
 CR2(){
-    ql repo https://github.com/shufflewzc/faker3.git "jd_|jx_|gua_|jddj_|getJDCookie" "activity|backUp|Coupon|update" "^jd[^_]|USER|utils|^JS|^TS|^JDJRValidator_|^ZooFaker|^sign|ql"
+    ql repo https://github.com/shufflewzc/faker3.git "jd_|jx_|gua_|jddj_|getJDCookie" "activity|backUp|Coupon|update" "^jd[^_]|USER|utils|^JS|^TS|^JDJRValidator_|^ZooFaker|^sign|ql|sentNotify"
 }
 CR3(){
     ql repo https://github.com/he1pu/JDHelp.git "jd_|jx_|getJDCookie" "Coupon|update" "^jd[^_]|USER|^sign|^ZooFaker|utils"
 }
 CR4(){
-    ql repo https://github.com/shufflewzc/faker2.git "jd_|jx_|gua_|jddj_|getJDCookie" "activity|backUp|Coupon|update" "^jd[^_]|USER|utils|^JS|^TS|^JDJRValidator_|^ZooFaker|^sign|ql"
+    ql repo https://github.com/shufflewzc/faker2.git "jd_|jx_|gua_|jddj_|getJDCookie" "activity|backUp|Coupon|update" "^jd[^_]|USER|utils|^JS|^TS|^JDJRValidator_|^ZooFaker|^sign|ql|sentNotify"
 }
 CR6(){
     ql repo https://github.com/Aaron-lv/sync.git "jd_|jx_|getJDCookie" "activity|backUp|Coupon" "^jd[^_]|USER|utils" "jd_scripts"
