@@ -1,5 +1,5 @@
 ## Version: v2.8.0
-## Date: 2021-06-20
+## Date: 2021-11-12
 ## Mod: Build20210815-002
 ## Update Content: 可持续发展纲要\n1. session管理破坏性修改\n2. 配置管理可编辑config下文件\n3. 自定义脚本改为查看脚本\n4. 移除互助相关
 
