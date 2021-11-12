@@ -34,7 +34,7 @@ Ninja="on" ##up为更新，on为启动，down为不运行
 一、集成仓库（Collected Repositories)
 2-JDHelloWorld
 3-he1pu
-4-shufflewzc
+4-Faker
 6-Aaron-lv
 7-yuannian1112
 二、其他仓库（Other Repositories）

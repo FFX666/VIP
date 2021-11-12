@@ -1,6 +1,6 @@
-## Version: v2.8.0
-## Date: 2021-11-11
-## Mod: Build20211111-001
+## Version: v3.0.0
+## Date: 2021-11-12
+## Mod: Build20211112-002 Faker Repository config
 ## Update Content: 可持续发展纲要\n1. session管理破坏性修改\n2. 配置管理可编辑config下文件\n3. 自定义脚本改为查看脚本\n4. 移除互助相关
 
 ## 上面版本号中，如果第2位数字有变化，那么代表增加了新的参数，如果只有第3位数字有变化，仅代表更新了注释，没有增加新的参数，可更新可不更新
@@ -183,6 +183,38 @@ case $1 in
         ;;
 esac
 
+## 12. 组队环境变量
+### 环境变量填写要求较高，建议群组内确认填写结果
+scr_name="$1"                                 ## 不可删除
+case $1 in
+    *jd_sendBean* | *jd_sddd*)                ## 送豆得豆活动脚本关键词
+        teamer_num="11"                       ## 单个队伍中的总账号数为 11 个
+        team_num="1"                          ## 每个账号发起组队的最大队伍数为 1 个
+        ;;
+    *xmGame*)                                 ## 小米-星空大冒险活动脚本关键词
+        teamer_num="11"                       ## 单个队伍中的总账号数为 11 个
+        team_num="1"                          ## 每个账号发起组队的最大队伍数为 1 个
+        ;;
+    *jd_zdjr*)                                ## 组队瓜分京豆活动脚本关键词
+        teamer_num="5 5 5 5"                  ## 对应各个活动中单个队伍中的总账号数分别为 5 5 5 5 个
+        team_num="2 3 3 5"                    ## 对应各个活动中每个账号发起组队的最大队伍数为 2 3 3 5 个
+        activityId=(                          ## 活动 activityId；需手动抓包。按数组分行填写至括号内
+          54f071f4eb794092a872392696be7d8d
+          0582063f78434ed599becfc8f812c2ee
+          bbda11ba7a9644148d65c8b0b78f0bd2
+          92c03af2ce744f6f94de181ccee15e4f
+        )
+        activityUrl=(                         ## 活动 activityUrl；需手动抓包。按数组分行填写至括号内
+          https://cjhydz-isv.isvjcloud.com
+          https://lzkjdz-isv.isvjcloud.com
+          https://lzkjdz-isv.isvjcloud.com
+          https://cjhydz-isv.isvjcloud.com
+        )
+        ;;
+    *)                                        ## 不可删除
+        scr_name=""                           ## 不可删除
+        ;;                                    ## 不可删除
+esac
 
 ## 其他需要的变量，脚本中需要的变量使用 export 变量名= 声明即可
 
@@ -298,6 +330,13 @@ export JD_TRY_MIN_PRICE=""
 ### 试用商品最多提供数量（过滤垃圾商品）
 export JD_TRY_MAX_SUPPLY_COUNT=""
 
+# 龙猪猪环境变量
+## 京豆雨通知，填写true为不关闭推送，false为关闭推送
+export RAIN_NOTIFY_CONTROL="false"
+## 整点京豆雨RRA
+export SUPER_RAIN_RRA=""
+## 半点京豆雨RRA
+export HALF_RAIN_RRA=""
 
 # 柠檬（胖虎部分环境变量）
 ## 1、京喜工厂抢茅台
@@ -362,140 +401,15 @@ export dlbtz="true"
 export lsjdh="jdAward3" ##兑换100豆
 ##export lsjdh="jdAward4" ##兑换牛奶
 
-# curtinlv 环境变量
-## 1、赚京豆
-### 助力账号，填写pt_pin或用户名的值，如 zlzh = ['aaaa','xxxx','yyyy'] ，支持ENV
-### export zlzh="$(echo $JD_COOKIE | sed "s/&/ /g; s/\S*pt_pin=\([^;]\+\);\S*/\'\1\',/g; s/^/[/; s/$\|,$/]/;" | awk 'BEGIN{for(i=0;i<10;i++)hex[i]=i;hex["A"]=hex["a"]=10;hex["B"]=hex["b"]=11;hex["C"]=hex["c"]=12;hex["D"]=hex["d"]=13;hex["E"]=hex["e"]=14;hex["F"]=hex["f"]=15;}{gsub(/\+/," ");i=$0;while(match(i,/%../)){;if(RSTART>1);printf"%s",substr(i,1,RSTART-1);printf"%c",hex[substr(i,RSTART+1,1)]*16+hex[substr(i,RSTART+2,1)];i=substr(i,RSTART+RLENGTH);}print i;}')"  ## 支持中文用户名
-export zlzh="$(echo $JD_COOKIE | sed "s/&/ /g; s/\S*pt_pin=\([^;]\+\);\S*/\'\1\',/g; s/^/[/; s/$\|,$/]/;")"
-## 2、全民抢京豆
-### export qjd_zlzh="$(echo $JD_COOKIE | sed "s/&/ /g; s/\S*pt_pin=\([^;]\+\);\S*/\'\1\',/g; s/^/[/; s/$\|,$/]/;" | awk 'BEGIN{for(i=0;i<10;i++)hex[i]=i;hex["A"]=hex["a"]=10;hex["B"]=hex["b"]=11;hex["C"]=hex["c"]=12;hex["D"]=hex["d"]=13;hex["E"]=hex["e"]=14;hex["F"]=hex["f"]=15;}{gsub(/\+/," ");i=$0;while(match(i,/%../)){;if(RSTART>1);printf"%s",substr(i,1,RSTART-1);printf"%c",hex[substr(i,RSTART+1,1)]*16+hex[substr(i,RSTART+2,1)];i=substr(i,RSTART+RLENGTH);}print i;}')"  ## 支持中文用户名
-export qjd_zlzh="$(echo $JD_COOKIE | sed "s/&/ /g; s/\S*pt_pin=\([^;]\+\);\S*/\'\1\',/g; s/^/[/; s/$\|,$/]/;")"
-## 3、签到领现金助力
-### export cash_zlzh="$(echo $JD_COOKIE | sed "s/&/ /g; s/\S*pt_pin=\([^;]\+\);\S*/\'\1\',/g; s/^/[/; s/$\|,$/]/;" | awk 'BEGIN{for(i=0;i<10;i++)hex[i]=i;hex["A"]=hex["a"]=10;hex["B"]=hex["b"]=11;hex["C"]=hex["c"]=12;hex["D"]=hex["d"]=13;hex["E"]=hex["e"]=14;hex["F"]=hex["f"]=15;}{gsub(/\+/," ");i=$0;while(match(i,/%../)){;if(RSTART>1);printf"%s",substr(i,1,RSTART-1);printf"%c",hex[substr(i,RSTART+1,1)]*16+hex[substr(i,RSTART+2,1)];i=substr(i,RSTART+RLENGTH);}print i;}')"  ## 支持中文用户名
-export cash_zlzh="$(echo $JD_COOKIE | sed "s/&/ /g; s/\S*pt_pin=\([^;]\+\);\S*/\'\1\',/g; s/^/[/; s/$\|,$/]/;")"
-## 4、京喜工厂开团助力 for Python
-### 支持指定账号开团，跑1次脚本默认开3次团，如未指定账号默认给账号一开团。
-### 变量ENV 指定开团账号。可填用户名 或 pt_pin 的值。示例：export jxgc_kaituan="用户1&用户2"
-export jxgc_kaituan="$(echo $JD_COOKIE | sed "s/&/ /g; s/\S*pt_pin=\([^;]\+\)\S*;/\1/g; s/ /\&/g;" | awk 'BEGIN{for(i=0;i<10;i++)hex[i]=i;hex["A"]=hex["a"]=10;hex["B"]=hex["b"]=11;hex["C"]=hex["c"]=12;hex["D"]=hex["d"]=13;hex["E"]=hex["e"]=14;hex["F"]=hex["f"]=15;}{gsub(/\+/," ");i=$0;while(match(i,/%../)){;if(RSTART>1);printf"%s",substr(i,1,RSTART-1);printf"%c",hex[substr(i,RSTART+1,1)]*16+hex[substr(i,RSTART+2,1)];i=substr(i,RSTART+RLENGTH);}print i;}')"  ## 支持中文用户名
-## 5、入会开卡
-### int，入会送豆满足此值，否则不入会
-export openCardBean="30"
-### 布尔值，是否记录符合条件的shopid(默认True)
-export record="true"
-### 布尔值， True:仅记录，不入会(默认False)
-export onlyrecord="false"
-### 布尔值，开启记忆功能，接力上一次异常中断位置继续。(默认yes)
-export memory="false"
-### 布尔值，True：只打印部分日志 False:打印所有日志
-export printlog="true"
-### Float，限制速度，单位秒，如果请求过快报错适当调整0.5秒以上
-export sleepNum="0.5"
-### 布尔值，True:使用作者远程仓库更新的id，False：使用本地shopid.txt的id
-export isRemoteSid="true"
-## 6、东东超市商品兑换
-### 填写商品名字，兼容模糊关键词
-export coinToBeans='京豆包'
-### 多账号并发，默认开启 True，关闭 False
-export blueCoin_Cc='True'
-### 轮次
-export startMaxNum="30"
-### 多线程并发，相当于每秒点击兑换次数...适当调整，手机会发烫
-export dd_thread="30"
-### 开始抢兑时间
-export starttime="23:59:59.00000000"
-### 结束时间
-export endtime="00:00:30.00000000"
-
-# Wenmoux 部分环境变量 
-## 1、QQ星系牧场自动兑换20豆
-export Cowexchange="true"
-## 2、欧洲狂欢杯兑换兑换豆子，填38豆子，填39e卡
-export Cupexid="39"
-## 3、10秒阅读
-### 填写自己CK
-export Readck=""
-### 填写自己设备UA
-export Read10UA=""
-### 填true推送消息，默认不推送
-export jrpush=""
-
-# smiek2221 环境变量
-## 1、燃动夏季—入会
-export summer_movement_joinjoinjoinhui="false" ##是否入会 true 入会，false 不入会
-## 2、燃动夏季—百元守卫战SH
-export summer_movement_ShHelpFlag="1" ##0 不开启也不助力 1 开启并助力 2 开启但不助力 默认开启并助力
-## 3、燃动夏季-新增只做邀请助力功能
-export summer_movement_HelpHelpHelpFlag="true" ##是否只执行邀请助力 true 是 false 不是 默认 false
-### 可以设置13点执行一下脚本
-if [ $(date "+%H") -eq 13 ]; then
-    export summer_movement_HelpHelpHelpFlag="true"
-fi
-## 4、京东签到图形验证修改火爆问题
-### 如果 read ECONNRESET 错误 可以试试
-### 环境变量 JOY_HOST 修改域名 https://jdjoy.jd.com 可以改成ip https://49.7.27.236
-### 如果上面ip不行就自己去ping下域名对应的ip cmd窗口输入—>ping jdjoy.jd.com 再改
-### 不要频繁请求 请过个半小时 1小时在执行
-export JOY_HOST=""
-## 5、图形验证文件 JDJRValidator_Pure.js 验证次数
-### 新增验证次数上限 默认25次 验证可能无法成功
-export JDJR_validator_Count="25"
-## 6、财富大陆热气球接客次数
-### 新增热气球接客 默认每次运行执行10次
-export gua_wealth_island_serviceNum="500"
-## 7、燃动夏季-新增屏蔽账号
-### export summer_movement_outuserID="2,5,7" ##屏蔽第几个账号的例子
-export summer_movement_outuserID=""
-## 8、修复点点券
-### 新增显示有多少个非法请求 可以开通知 
-export DDQ_NOTIFY_CONTROL="" ##不填或false为通知，true为不通知
-
-## 19-38、预备
-j=30
-for (( i = 11; i <= j; i++ )); do
-    export guaopencard$i="true"
-    export guaopencard_addSku$i="true"
-done
-
-# cdle 环境变量
-## 1、全民运动会守卫红包
-### 助力码，需手动抓包
-export olympicgames_inviteId=""
-## 2、签到领现金兑换
-### 填写 pt_pin@金额，pt_pin为用户名，可以在 COOKIES 中提取；金额为 2 或 10，例如 LiLei@2 或 HanMeimei@10。多值用 & 连接，例如 LiLei@2&HanMeimei@10
-### export exchangeAccounts="$(echo $JD_COOKIE | sed "s/&/\n/g; s/\S*pt_pin=\([^;]\+\);\S*/\1@10/g; s/\n/\&/g;")"  ##兑10元现金，比较难兑
-export exchangeAccounts="$(echo $JD_COOKIE | sed "s/&/ /g; s/\S*pt_pin=\([^;]\+\);\S*/\1@2/g; s/ /&/g;")"           ##兑2元现金
-## 3、愤怒的现金
-### 极速助力，打击黑产盗取现金的犯罪行为。默认向前助力9个账号，若要指定被助力账号，需cashHelpPins环境变量中填入需要助力的pt_pin，有多个请用@符号连接。
-export cashHelpPins="$(echo $JD_COOKIE | sed "s/&/\n/g; s/\S*pt_pin=\([^;]\+\);\S*/\1/g; s/\n/@/g;")"
-## 4、愤怒的锦鲤
-### 助力账号，填写pt_pin或用户名的值。多个 pt_pin 值用 @ 连接
-export kois="$(echo $JD_COOKIE | sed "s/&/\n/g; s/\S*pt_pin=\([^;]\+\);\S*/\1/g; s/\n/@/g;")"
-## 5、发财大赢家助力
-### 需要设置环境变量dyjHelpPins来指定要助力的账号
-export dyjHelpPins="$(echo $JD_COOKIE | sed "s/&/\n/g; s/\S*pt_pin=\([^;]\+\);\S*/\1/g; s/\n/@/g;")"
-## 6、早起赢现金
-### 入口：京东汽车-瓜分万元
-### 备注：支付一元才能参与活动，填写环境变量morningScPins给指定账号打卡
-export morningScPins="$(echo $JD_COOKIE | sed "s/&/\n/g; s/\S*pt_pin=\([^;]\+\);\S*/\1/g; s/\n/@/g;")"
-## 7、赚30元
-### 备注：赚30元每日签到红包、天降红包助力，在earn30Pins环境变量中填入需要签到和接受助力的账号。
-### 技巧：每月可以提现100元，但需要邀请一个新人下首单。可以用已注册手机号重新注册为新人账号，切换ip可以提高成功率。
-export earn30Pins="$(echo $JD_COOKIE | sed "s/&/\n/g; s/\S*pt_pin=\([^;]\+\);\S*/\1/g; s/\n/@/g;")"
-## 8、真·抢京豆
-### 高速并发抢京豆，专治偷助力。设置环境变量angryBeanPins为指定账号助力，默认不助力。
-### 环境变量angryBeanMode可选值priority或speed或smart，默认smart模式。
-### 默认推送通知，如要屏蔽通知需将环境变量enableAngryBeanNotify的值设为false。
-export angryBeanPins="$(echo $JD_COOKIE | sed "s/&/ /g; s/\S*pt_pin=\([^;]\+\);\S*/\1/g; s/ /@/g;")"
-export angryBeanMode="priority"
-export enableAngryBeanNotify="true"
 
 
-# Aaron-lv 环境变量
-## 1、京东健康社区京豆兑换
-export JD_HEALTH_REWARD_NAME="20" ##只能兑换京豆，填写纯数字20 10 5 3
 
 # Ninja 环境变量
 ## 1、通知黑名单
 ### 使用 & 分隔，例如 东东乐园&东东萌宠
 export NOTIFY_SKIP_LIST=""
 
+# Faker2库环境变量
+## 1、清空购物车
+export JD_CART_REMOVE=""
+export JD_CART_REMOVESIZE=""
