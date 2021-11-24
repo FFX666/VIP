@@ -369,4 +369,4 @@ else
     exit 0
 fi
 
-log "全面部署已完成！enjoy!!!"
+log "部署完成了，另外Faker教程内有一键安装依赖脚本，按需使用"
