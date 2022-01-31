@@ -117,19 +117,19 @@ ql repo https://github.com/zooPanda/zoo.git "zoo"
 在青龙主页添加4个定时任务，定时随便自己喜欢设置，任务代码如下：
 
 ```
-ql repo https://github.com.cnpmjs.org/chinnkarahoi/jd_scripts.git "jd_|jx_|getJDCookie" "activity|backUp" "^jd[^_]|USER"
+ql repo https://ghproxy.com/https://github.com/chinnkarahoi/jd_scripts.git "jd_|jx_|getJDCookie" "activity|backUp" "^jd[^_]|USER"
 ```
 
 ```
-ql repo https://github.com.cnpmjs.org/monk-coder/dust.git "i-chenzhe|normal|member|car" "backup"
+ql repo https://ghproxy.com/https://github.com/monk-coder/dust.git "i-chenzhe|normal|member|car" "backup"
 ```
 
 ```
-ql repo https://github.com.cnpmjs.org/nianyuguai/longzhuzhu.git "qx"
+ql repo https://ghproxy.com/https://github.com/nianyuguai/longzhuzhu.git "qx"
 ```
 
 ```
-ql repo https://github.com.cnpmjs.org/whyour/hundun.git "quanx" "tokens|caiyun|didi|donate|fold|Env"
+ql repo https://ghproxy.com/https://github.com/whyour/hundun.git "quanx" "tokens|caiyun|didi|donate|fold|Env"
 ```
 
 上面4个分别是lxk0301的、藏经阁的、龙猪猪的京豆雨、混沌的京东京喜系列
@@ -157,7 +157,7 @@ docker exec -it qinglong ql restart
 
 - 拉取自定义仓库
 ``` sh
-docker exec -it qinglong ql repo https://github.com.cnpmjs.org/whyour/hundun.git "quanx" "tokens|caiyun|didi|donate|fold|Env"
+docker exec -it qinglong ql repo https://ghproxy.com/https://github.com/whyour/hundun.git "quanx" "tokens|caiyun|didi|donate|fold|Env"
 ```
 
 - 拉取单个脚本
