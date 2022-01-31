@@ -9,7 +9,7 @@ dir_shell=/ql/shell
 ## 预设的仓库及默认调用仓库设置
 ## 将"repo=$repo1"改成repo=$repo2"或其他，以默认调用其他仓库脚本日志
 ## 也可自行搜索本脚本内的"name_js=("和"name_js_only",将"repo"改成"repo2"或其他，用以自由组合调用仓库的脚本日志
-repo1='shufflewzc_faker3'             #预设的 panghu999 仓库
+repo1='panghu999_jd_scripts'             #预设的 panghu999 仓库
 repo2='JDHelloWorld_jd_scripts'          #预设的 JDHelloWorld 仓库
 repo3='he1pu_JDHelp'                     #预设的 he1pu 仓库
 repo4='shufflewzc_faker2'                #预设的 shufflewzc 仓库
