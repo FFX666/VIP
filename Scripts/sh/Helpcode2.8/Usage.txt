@@ -28,7 +28,7 @@ b) 有些情况下活动脚本输出的互助码不全，例如：你有 10 个�
 repo1='panghu999_jd_scripts'       #预设的 panghu999 仓库
 repo2='JDHelloWorld_jd_scripts'   #预设的 JDHelloWorld 仓库
 repo3='he1pu_JDHelp'                      #预设的 he1pu 仓库
-repo4='hyominnn2n_hyominnn2n'               #预设的 shufflewzc 仓库
+repo4='Hyominnn_hyominnn'               #预设的 shufflewzc 仓库
 repo=$repo1                                       #默认调用 panghu999 仓库脚本日志
 
 4、导出京喜农场 Token 的方法
