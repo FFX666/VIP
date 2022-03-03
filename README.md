@@ -44,7 +44,7 @@ ql repo https://github.com/shufflewzc/faker2.git "jd_|jx_|gua_|jddj_|getJDCookie
  
 - **Allinone TaskSub-Links** *Created by sngxpro & Maintained by me*
   ```
-  https://ghproxy.com/https://raw.githubusercontent.com/Oreomeow/QuanX/master/task/AllinOne.json
+  https://git.metauniverse-cn.com/https://raw.githubusercontent.com/Oreomeow/QuanX/master/task/AllinOne.json
   ```
 
 ### Summary

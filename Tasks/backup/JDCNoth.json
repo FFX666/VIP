@@ -10,7 +10,7 @@
             "time":"12 * * * *",
             "job":{
                 "type":"runjs",
-                "target":"https://ghproxy.com/https://raw.githubusercontent.com/chinnkarahoi/jd_scripts/master/jd_pigPet.js"
+                "target":"https://git.metauniverse-cn.com/https://raw.githubusercontent.com/chinnkarahoi/jd_scripts/master/jd_pigPet.js"
             },
             "running":true
         },
@@ -20,7 +20,7 @@
             "time":"35 0-23/2 * * *",
             "job":{
                 "type":"runjs",
-                "target":"https://ghproxy.com/https://raw.githubusercontent.com/chinnkarahoi/jd_scripts/master/jd_moneyTree.js"
+                "target":"https://git.metauniverse-cn.com/https://raw.githubusercontent.com/chinnkarahoi/jd_scripts/master/jd_moneyTree.js"
             },
             "running":true
         },
@@ -30,7 +30,7 @@
             "time":"15 0,7-23 * * *",
             "job":{
                 "type":"runjs",
-                "target":"https://ghproxy.com/https://raw.githubusercontent.com/chinnkarahoi/jd_scripts/master/jd_daily_egg.js"
+                "target":"https://git.metauniverse-cn.com/https://raw.githubusercontent.com/chinnkarahoi/jd_scripts/master/jd_daily_egg.js"
             },
             "running":true
         },
@@ -40,7 +40,7 @@
             "time":"1 12,23 * * *",
             "job":{
                 "type":"runjs",
-                "target":"https://ghproxy.com/https://raw.githubusercontent.com/chinnkarahoi/jd_scripts/master/jd_family.js"
+                "target":"https://git.metauniverse-cn.com/https://raw.githubusercontent.com/chinnkarahoi/jd_scripts/master/jd_family.js"
             },
             "running":false
         },
@@ -50,7 +50,7 @@
             "time":"0,1,2 0 * * *",
             "job":{
                 "type":"runjs",
-                "target":"https://ghproxy.com/https://raw.githubusercontent.com/ddgksf2013/Cuttlefish/master/Jd/jd_cash_exchange.js"
+                "target":"https://git.metauniverse-cn.com/https://raw.githubusercontent.com/ddgksf2013/Cuttlefish/master/Jd/jd_cash_exchange.js"
             },
             "running":true
         },
@@ -60,7 +60,7 @@
             "time":"6 0 * * *",
             "job":{
                 "type":"runjs",
-                "target":"https://ghproxy.com/https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/scripts/jd/jd_rankingList.js"
+                "target":"https://git.metauniverse-cn.com/https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/scripts/jd/jd_rankingList.js"
             },
             "running":true
         },
@@ -70,7 +70,7 @@
             "time":"0 0 * * *",
             "job":{
                 "type":"runjs",
-                "target":"https://ghproxy.com/https://raw.githubusercontent.com/ztxtop/x/main/jx_cfdtx.js"
+                "target":"https://git.metauniverse-cn.com/https://raw.githubusercontent.com/ztxtop/x/main/jx_cfdtx.js"
             },
             "running":false
         },
@@ -80,7 +80,7 @@
             "time":"0",
             "job":{
                 "type":"runjs",
-                "target":"https://ghproxy.com/https://raw.githubusercontent.com/GoodStudying/local_file/main/task/v2p_task/jd_unbind.js"
+                "target":"https://git.metauniverse-cn.com/https://raw.githubusercontent.com/GoodStudying/local_file/main/task/v2p_task/jd_unbind.js"
             },
             "running":false
         },
@@ -90,7 +90,7 @@
             "time":"0",
             "job":{
                 "type":"runjs",
-                "target":"https://ghproxy.com/https://raw.githubusercontent.com/sngxpro/QuanX/master/scripts/member_0X.js"
+                "target":"https://git.metauniverse-cn.com/https://raw.githubusercontent.com/sngxpro/QuanX/master/scripts/member_0X.js"
             },
             "running":false
         },
@@ -100,7 +100,7 @@
             "time":"5 7 * * *",
             "job":{
                 "type":"runjs",
-                "target":"https://ghproxy.com/https://raw.githubusercontent.com/dompling/Script/master/jd/jd_jr_sign.js"
+                "target":"https://git.metauniverse-cn.com/https://raw.githubusercontent.com/dompling/Script/master/jd/jd_jr_sign.js"
             },
             "running":false
         }

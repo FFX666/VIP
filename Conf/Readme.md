@@ -858,7 +858,7 @@ AutoDelCron="true"
 
 ```
 ## 2、由于github仓库拉取较慢，所以会默认添加代理前缀，如不需要请移除
-GithubProxyUrl="https://ghproxy.com/"
+GithubProxyUrl="https://git.metauniverse-cn.com/"
 ```
 
 ```
