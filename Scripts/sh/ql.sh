@@ -13,7 +13,7 @@ echo -e "\e[36m
        ▀                        ▀████▀▀                                 ▀████▀▀
 \e[0m\n"
 
-DOCKER_IMG_NAME="shufflewzc/qinglong"
+DOCKER_IMG_NAME="yanyuwangluo/qinglong:2.10.13"
 JD_PATH=""
 SHELL_FOLDER=$(pwd)
 CONTAINER_NAME=""
