@@ -13,11 +13,11 @@ echo -e "\e[36m
        ▀                        ▀████▀▀                                 ▀████▀▀
 \e[0m\n"
 
-DOCKER_IMG_NAME="yanyuwangluo/qinglong:2.10.13"
+DOCKER_IMG_NAME="yanyuwangluo/qinglong"
 JD_PATH=""
 SHELL_FOLDER=$(pwd)
 CONTAINER_NAME=""
-TAG="latest"
+TAG="2.10.13"
 NETWORK="bridge"
 JD_PORT=5700
 NINJA_PORT=5701
