@@ -21,46 +21,68 @@ docker pull whyour/qinglong:latest
 
 ``` sh
 docker run -dit \
-   -v $PWD/ql/config:/ql/config \
-   -v $PWD/ql/log:/ql/log \
-   -v $PWD/ql/db:/ql/db \
-   -p 5700:5700 \
-   --name qinglong \
-   --hostname qinglong \
-   --restart always \
-   whyour/qinglong:latest
+  -v $PWD/ql/config:/ql/config \
+  -v $PWD/ql/db:/ql/db \
+  -v $PWD/ql/log:/ql/log \
+  -v $PWD/ql/repo:/ql/repo \
+  -v $PWD/ql/raw:/ql/raw \
+  -v $PWD/ql/scripts:/ql/scripts \
+  -v $PWD/ql/jbot:/ql/jbot \
+  -p 5700:5700 \
+  -e ENABLE_HANGUP=true \
+  -e ENABLE_TG_BOT=true \
+  -e ENABLE_WEB_PANEL=true \
+  -e TZ=CST-8 \
+  --name qinglong \
+  --hostname qinglong \
+  --restart always \
+  whyour/qinglong:latest
 ```
 
-#### 2-2 n1等路由器
+#### 2-2 N1等路由器
 
 ``` sh
 docker run -dit \
-   -v $PWD/ql/config:/ql/config \
-   -v $PWD/ql/log:/ql/log \
-   -v $PWD/ql/db:/ql/db \
-   --net host \
-   --name qinglong \
-   --hostname qinglong \
-   --restart always \
-   whyour/qinglong:latest
+  -v $PWD/ql/config:/ql/config \
+  -v $PWD/ql/db:/ql/db \
+  -v $PWD/ql/log:/ql/log \
+  -v $PWD/ql/repo:/ql/repo \
+  -v $PWD/ql/raw:/ql/raw \
+  -v $PWD/ql/scripts:/ql/scripts \
+  -v $PWD/ql/jbot:/ql/jbot \
+  -e ENABLE_HANGUP=true \
+  -e ENABLE_TG_BOT=true \
+  -e ENABLE_WEB_PANEL=true \
+  -e TZ=CST-8 \
+  --net host \
+  --name qinglong \
+  --hostname qinglong \
+  --restart always \
+  whyour/qinglong:latest
 ```
 
 #### 2-3 MacVlan方式
 
 ``` sh
 docker run -dit \
-  --name QL \
-  --hostname QL \
+  --name qinglong \
+  --hostname qinglong \
   --restart always \
   --net=macnet \
   --ip=192.168.2.20 \
   --dns=192.168.2.2 \
   --mac-address C2:F2:9C:C5:B1:01 \
-  -v $PWD/QL/config:/ql/config \
-  -v $PWD/QL/log:/ql/log \
-  -v $PWD/QL/db:/ql/db \
-  -v $PWD/QL/scripts:/ql/scripts \
-  -v $PWD/QL/jbot:/ql/jbot \
+  -v $PWD/ql/config:/ql/config \
+  -v $PWD/ql/db:/ql/db \
+  -v $PWD/ql/log:/ql/log \
+  -v $PWD/ql/repo:/ql/repo \
+  -v $PWD/ql/raw:/ql/raw \
+  -v $PWD/ql/scripts:/ql/scripts \
+  -v $PWD/ql/jbot:/ql/jbot \
+  -e ENABLE_HANGUP=true \
+  -e ENABLE_TG_BOT=true \
+  -e ENABLE_WEB_PANEL=true \
+  -e TZ=CST-8 \
   whyour/qinglong:latest
 ```
 
@@ -83,10 +105,10 @@ docker exec -it qinglong cat /ql/config/auth.json
 ## 四、拉取脚本
 
 最新拉取代码点击这里 [🗝](https://github.com/Oreomeow/VIP#-tasks)  
-国内vps等加`https://ghproxy.com/`  
+国内vps等加`https://git.metauniverse-cn.com/`  
 > 示例
 ```
-ql repo https://ghproxy.com/https://github.com/zooPanda/zoo.git "zoo"
+ql repo https://git.metauniverse-cn.com/https://github.com/zooPanda/zoo.git "zoo"
 ```
 
 <details>
@@ -95,19 +117,19 @@ ql repo https://ghproxy.com/https://github.com/zooPanda/zoo.git "zoo"
 在青龙主页添加4个定时任务，定时随便自己喜欢设置，任务代码如下：
 
 ```
-ql repo https://ghproxy.com/https://github.com/chinnkarahoi/jd_scripts.git "jd_|jx_|getJDCookie" "activity|backUp" "^jd[^_]|USER"
+ql repo https://git.metauniverse-cn.com/https://github.com/chinnkarahoi/jd_scripts.git "jd_|jx_|getJDCookie" "activity|backUp" "^jd[^_]|USER"
 ```
 
 ```
-ql repo https://ghproxy.com/https://github.com/monk-coder/dust.git "i-chenzhe|normal|member|car" "backup"
+ql repo https://git.metauniverse-cn.com/https://github.com/monk-coder/dust.git "i-chenzhe|normal|member|car" "backup"
 ```
 
 ```
-ql repo https://ghproxy.com/https://github.com/nianyuguai/longzhuzhu.git "qx"
+ql repo https://git.metauniverse-cn.com/https://github.com/nianyuguai/longzhuzhu.git "qx"
 ```
 
 ```
-ql repo https://ghproxy.com/https://github.com/whyour/hundun.git "quanx" "tokens|caiyun|didi|donate|fold|Env"
+ql repo https://git.metauniverse-cn.com/https://github.com/whyour/hundun.git "quanx" "tokens|caiyun|didi|donate|fold|Env"
 ```
 
 上面4个分别是lxk0301的、藏经阁的、龙猪猪的京豆雨、混沌的京东京喜系列
@@ -135,12 +157,12 @@ docker exec -it qinglong ql restart
 
 - 拉取自定义仓库
 ``` sh
-docker exec -it qinglong ql repo https://ghproxy.com/https://github.com/whyour/hundun.git "quanx" "tokens|caiyun|didi|donate|fold|Env"
+docker exec -it qinglong ql repo https://git.metauniverse-cn.com/https://github.com/whyour/hundun.git "quanx" "tokens|caiyun|didi|donate|fold|Env"
 ```
 
 - 拉取单个脚本
 ``` sh
-docker exec -it qinglong ql raw https://ghproxy.com/https://raw.githubusercontent.com/moposmall/Script/main/Me/jx_cfd.js
+docker exec -it qinglong ql raw https://git.metauniverse-cn.com/https://raw.githubusercontent.com/moposmall/Script/main/Me/jx_cfd.js
 ```
 
 - 删除7天前的所有日志

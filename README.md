@@ -1,5 +1,5 @@
-# 📌 Some exchange tasks will be run with V2P because V2P is stable. [News](./Log/News.md#news)
-# 📌 [Jiaolong Updates](./Log/Updatelog/Jiaolong.md#jiaolong)
+# 📌 [News](./Log/News.md#news)
+
 
 # Statement
 
@@ -25,8 +25,9 @@
 ## [★](./Tasks) Tasks
 ### [<img src="/Icons/qinglong/QL.png" title="QL" width="30" height="30" />][QL] ← More
 ```
-ql repo https://github.com/JDHelloWorld/jd_scripts.git "jd_|jx_|getJDCookie" "activity|backUp|Coupon|enen" "^jd[^_]|USER"
+ql repo https://github.com/shufflewzc/faker2.git "jd_|jx_|gua_|jddj_|getJDCookie" "activity|backUp|update" "^jd[^_]|USER|utils|^ZooFaker|^JDJRValidator|^sign"
 ```
+- [extra.sh](./Tasks/qlrepo/extra.sh)
 
 
 ## [★](./INS) Instructions
@@ -36,17 +37,14 @@ ql repo https://github.com/JDHelloWorld/jd_scripts.git "jd_|jx_|getJDCookie" "ac
 
 
 ## ☆ QuantumultX
-- **Lazy Configurations** *By sngxpro*
+- **Lazy Configurations** *Created by sngxpro & Maintained by me*
   ```  
-  https://raw.githubusercontent.com/Youthsongs/QuanX/master/sngx2021.conf
+  https://raw.githubusercontent.com/Oreomeow/QuanX/master/sngx2021.conf
   ```
  
-- **Allinone TaskSub-Links** *By sngxpro*
+- **Allinone TaskSub-Links** *Created by sngxpro & Maintained by me*
   ```
-  https://raw.githubusercontent.com/Youthsongs/QuanX/master/task/AllinOne.json
-  ```
-  ```
-  https://ghproxy.com/https://raw.githubusercontent.com/Youthsongs/QuanX/master/task/AllinOne.json
+  https://git.metauniverse-cn.com/https://raw.githubusercontent.com/Oreomeow/QuanX/master/task/AllinOne.json
   ```
 
 ### Summary

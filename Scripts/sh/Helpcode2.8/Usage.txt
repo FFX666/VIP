@@ -1,85 +1,79 @@
-ʹ�÷�����
+使用方法：
 
-����code.sh �ǻ������� 2.2.0 �� code.sh �޸Ķ�����ֻ֧������ 2.8.0 �����ϡ�֧�ֻ���ģ���޸ģ�֧�ֻ����������ʾ�ȡ�
-��Ҫԭ����
-a) code.sh���з������׶Σ�
-1����һ�׶Σ��Ӹ�����ű���־�����������룬�� COOKIES У�Ժ����������������ѡ��Ļ�������ģ�壬���ɶ�Ӧ�Ļ����������������Ļ�����ͻ������������ code.sh ����־��·����/ql/log/code/��
+〇、前言
+code.sh 是基于青龙 2.2.0 的 code.sh 修改而来，仅支持 2.8.0 及以上版本的青龙，不支持2.2.0及以下版本的青龙。主要功能包括：①批量格式化导出互助码和互助规则，并自动填写、更新 task_before.sh 配置文件中的互助码和互助规则；②支持互助模板修改；③支持指定活动采用指定互助模板；④支持临时屏蔽某账号被助力(这些账号仍可助力其他账号)；⑤支持自动静默安装或静默修复常用的 node 依赖包(支持自定义所需要安装的依赖包)；⑥支持 COOKIES 批量格式化导出；⑦支持自动备份旧的 task_before.sh 及删除过期的备份(可自定义过期时长)。
+task_before.sh 是本人基于青龙原版修改而来，支持包括东东农场、京喜工厂、摇钱树、京喜Token等16个活动的互助码、互助规则的格式化导出和提交。此外，配合置顶 config.sh 文件，可以实现临时禁止某些 COOKIE 参加所有活动或某些活动功能。
 
-2���ڶ��׶Σ���ȡ code.sh ����־�� task_before.sh ��У��ÿһ��������ͻ����������ݣ�������ݲ�һ�£����Զ���д���� task_before.sh �Ļ�����������򡣵� code.sh ��־�л������ǿ�ֵ���� undefined �����������ǿ�ֵ�����ʱ��������д task_before.sh ��Ӧ�Ļ�����ͻ�������
+主要原理：
+a) code.sh 工作主要分两个阶段：
+1、第一阶段：从各个活动脚本日志中搜索互助码，跟 COOKIES 的 pt_pin (用户名)校验后整理输出。根据你选择的互助规则模板，生成对应的互助规则。最新整理的互助码和互助规则输出到 code.sh 的日志，日志路径在 /ql/log/code/；
+2、第二阶段：读取 code.sh 的日志和 task_before.sh 。校对每一条互助码和互助规则内容，如果内容不一致，则自动改写更新 task_before.sh 的互助码和互助规则。当 code.sh 日志中互助码为 undefined 或 {} 时，跳过更新改写 task_before.sh 对应的互助码。
 
-b) ��Щ��ű�����Ļ����벻ȫ����������10���˺ţ�Ŀǰ����һ�룬��־ֻ�����5������ô code.sh ������Ҳ��ֻ��5���л����룬5����ֵ��
-���� code.sh ���治�Ὣ��־�л�����ͻ�������Ŀ�ֵ�� undefined ��д��task_before.sh������ code.sh �ܵô���Խ�࣬task_before.sh ����Ļ�����ͻ�������Խ������
+b) 有些情况下活动脚本输出的互助码不全，例如：你有 10 个账号，目前活动脚本只跑了一半，日志只输出了 5 个，那么 code.sh 整理的也就只有 5 个有互助码，5 个空值。那么 task_before.sh 的互助码和互助规则也会相应更新(除了口袋书店)。
 
-һ��������廥�����Զ����¼�����񡣿��Զ���ȡ���µĸ�ʽ��������������־���Զ����� task_before.sh �еĻ����롣
-1���� code.sh �ű�������������·��/ql/config/��
-ע�������ǰû�����ù� task_before.sh �ű�������ʹ�ø����ṩ�ĳ�ʼ��ģ���ļ�������·��Ҳ�� /ql/config/�������ǰ�������ù� task_before.sh ��������ͬģ��ȶ��ı����һ�δ��룬�������ύ������ͻ����������ű����������ȱʧ�����ܵ��»����쳣��
+一、添加面板互助码自动更新监控任务。可自动读取最新的格式化导出互助码日志，自动更新 task_before.sh 中的互助码。
+1、将 code.sh 和配套的 task_before.sh 脚本拷贝到容器内路径/ql/config/。如果此前已将改路径映射至主机，则拷贝到主机对应路径即可；
+注： code.sh 必须配套提供的 task_before.sh 模板使用。如自行使用其他文件以致出现互助码输出不正常，提交活动失败等问题，请自我检讨。
 
-2����ʽ�����»�����Ķ�ʱ�������
-���ƣ���ʽ�����»�����
-���bash /ql/config/code.sh
-��ʱ����*/60 * * * *
+2、格式化更新互助码的定时任务规则：
+名称：格式化更新互助码
+命令：bash /ql/config/code.sh &
+定时规则：10 * * * *
+注：①命令千万不要用 task /ql/config/code.sh。否则会出现报错，且可能导致互助码和互助规则写入不完整。②由于目前青龙面板存在"手动运行命令卡在途中无法运行完整"的 BUG，实测命令末尾加上" &"(不含引号)，暂时可以规避该 BUG。
 
-3����Ҫ��ȡ��ű���־���ܸ�ʽ������������Ļ����뼰��������Ŀǰ�������������ֿ�Ľű���־������ȡ���ȼ�˳��Ϊ��
-a)���ʣ��ֻ�����ά�� lxk0301 �ֿ⣺
-���ƣ����ʣ��ֻ�����ά�� lxk0301 �ֿ�
-���ql repo https://github.com/panghu999/jd_scripts.git "jd_|jx_|getJDCookie" "activity|backUp|Coupon|jd_try|format_" "^jd[^_]|USER"
-��ʱ����34 8,12,16,20,0 * * *
+3、需要读取活动脚本日志才能格式化整理各个活动的互助码及互助规则。对应的仓库拉取命令详见置顶"截至XXXX年XX月XX日XX:XX还在维护的仓库"
+## 预设的仓库及默认调用仓库设置
+## 将"repo=$repo1"改成repo=$repo2"或其他，以默认调用其他仓库脚本日志
+## 也可自行搜索本脚本内的"name_js=("和"name_js_only",将"repo"改成"repo2"或其他，用以自由组合调用仓库的脚本日志
+repo1='panghu999_jd_scripts'       #预设的 panghu999 仓库
+repo2='JDHelloWorld_jd_scripts'   #预设的 JDHelloWorld 仓库
+repo3='he1pu_JDHelp'                      #预设的 he1pu 仓库
+repo4='shufflewzc_faker2'               #预设的 shufflewzc 仓库
+repo=$repo1                                       #默认调用 panghu999 仓库脚本日志
 
-b)JDHelloWorld ��ά�� lxk0301 �ֿ⣺
-���ƣ�JDHelloWorld ��ά�� lxk0301 �ֿ�
-���ql repo https://github.com/JDHelloWorld/jd_scripts.git "jd_|jx_|getJDCookie" "activity|backUp|Coupon|enen" "^jd[^_]|USER"
-��ʱ����32 8,12,16,20,0 * * *
+4、导出京喜农场 Token 的方法
+(由于 Aaron-lv 等大佬的新版财富岛脚本内直接把 token 传递给提现接口实现提现，脚本代码已经不支持导出 TokenJxnc 变量，因此不用刻意追求导出)：
+a) 前提：必须搭配最新的 task_before.sh 模板，否则京喜财富岛提现无法读取到 token。
+b) 步骤：运行一次 code.sh，再根据日志提示的优先仓库，运行一次京喜财富岛活动脚本。再运行一次 code.sh 。
+注：b) 步骤 code.sh 定时任务会配合京喜财富岛活动自动处理。有两点需要格外注意：①大多数京喜财富岛的定时任务间隔比较长，活动自身的运行时间也很长。所以自动处理，可能需要等到凌晨前后才会把 token 收集齐。②由于青龙 config.sh 默认的定时任务超时时间为 1h ，如果帐号比较多，1h 不够京喜财富岛跑完，那么就会导致 token 始终收集不齐。我个人把超时时间设置成了 3h。即：CommandTimeoutTime="3h"
+c）问题：
+1) task_before.sh 的 Token 是空值？
+答：必须先运行 code.sh ，将"京喜财富岛的脚本格式化输出京喜token"功能解锁，再完整运行一次优先仓库的京喜财富岛活动脚本后，最后再运行 code.sh 。否则 Token 可能会无法写入或写入不完整。
+2) task_before.sh  Token 写入正常，但是京喜财富岛提现还是读取不到 Token ？
+答：①确保 task_before.sh 是最新版，具体可以比对你的文件和置顶模板的第三行 Build 号。
+    ②京喜财富岛的任务不能设置 conc JD_COOKIE 并发多线程，否则会导致 Token 读取异常。
 
-c)lxk0301 �ֿ⣺
-���ƣ�lxk0301 �ֿ�
-���ql repo https://github.com/chinnkarahoi/jd_scripts.git "jd_|jx_|getJDCookie" "activity|backUp|Coupon" "^jd[^_]|USER"
-��ʱ����20 8,12,16,20,0 * * *
+二、其他自定义的参数配置详见脚本内容注释。如：
+1、自定义互助规则模板定义；
+2、定义指定活动采用指定的互助模板；
+3、自定义是否修改或更新 task_before.sh 文件中的互助码和互助规则；
+4、自动备份 task_before.sh 和删除指定天数以前的备份文件；
+5、支持自定义指定某账号不参加某活动(配套置顶 config_sample.sh 和 task_before.sh 模板使用)；
+6、自定义屏蔽指定账户被助力，但不影响这些帐号助力其他帐号。
 
-4��������ϲũ�� Token �ķ�����
-a) ǰ�᣺����������µ� task_before.sh ģ�壬����ϲ�Ƹ��������޷���ȡ�� token��
-b) ���裺����һ�� code.sh���ٸ�����־��ʾ�����Ȳֿ⣬����һ�ξ�ϲ�Ƹ�����ű���������һ�� code.sh ��
-c�����⣺
-1) task_before.sh �� Token �ǿ�ֵ��
-�𣺱�����������һ�����Ȳֿ�ľ�ϲ�Ƹ�����ű��������� code.sh ������ Token ���ܻ��޷�д���д�벻������
-2) task_before.sh  Token д�����������Ǿ�ϲ�Ƹ������ֻ��Ƕ�ȡ���� Token ��
-�𣺢�ȷ�� task_before.sh �����°棬������Աȶ�����ļ����ö�ģ��ĵ����� Build �š�
-         �ھ�ϲ�Ƹ��������������� conc JD_COOKIE �������̣߳�����ᵼ�� Token ��ȡ�쳣��
+三、由于 code.sh 会对 task_before.sh 文件作修改，为了避免误操作导致 code.sh 启动多次，造成 task_before.sh 文件改写异常。因此，code.sh 启动时会自动检测线程数量是否适合继续运行脚本。
+如果反复提醒检测到 code.sh 的运行线程过多，建议稍后重试。
+如果非要强行运行，方法如下：
+① 修改config.sh如果日志输出线程数是 9
+② 再在 code.sh 搜索
+proc_num="7" 改成 proc_num="9"
+然后 code.sh 就可以运行了，但不建议这么做，因为这是一个防呆设计。
 
-���������Զ���Ĳ������ã�
-1���Զ��廥������ģ�嶨��
-code.sh Ĭ�ϻ�������Ϊ�������Ȼ�������ģ�塱���Լ�����ע�Ͳ����޸�ģ�壻
-## ���� jcode �ű������Ļ�����ģ����ʽ��ѡ�
-## ���� ʹ�á������˳������ģ�塱��Cookie�����ǰ����������
-## �� 0 ʹ�á�ȫ��һ������ģ�塱�������˻�Ҫ��������ȫ��һ��
-## �� 1 ʹ�á����Ȼ�������ģ�塱�������˻������������һ��
-## �� 2 ʹ�á����˳������ģ�塱�����׽ű����˺ż����˳��������ÿ�����ɵ�˳�򶼲�һ�¡�
-HelpType="1"
+四、code.sh 安装依赖包后的检测方法：
+① 进入青龙控制台
+docker exec -it qinglong bash
+注：qinglong 为容器名称
+② 执行检查依赖的可靠性代码，将下文代码部分整体复制粘贴到控制台并回车：
+package_name="canvas png-js date-fns axios crypto-js ts-md5 tslib @types/node dotenv typescript fs require tslib"
 
-2���Զ����Ƿ��޸������ļ�
-## �����Ƿ��Զ����������ļ��еĻ�����ͻ�������Ĭ��Ϊ1����ʾ���£����ջ�������ֵ��ʾ�����¡�
-UpdateType="1"
-
-3���ֿ������Զ���
-�ű����߶������£�
-repo1='panghu999'
-repo2='JDHelloWorld'
-repo3='chinnkarahoi'
-�����Ҫ������Ͻű��ģ������� name_js �������ڽű�����ǰ׺"repo"�滻������ָ����"repo1" ��"repo2"��"repo3"��
-ע�������������еĽű������־�Ļ������ı����򲢲�ͳһ���ֻ��߲���������롣�����ݲ�֧���������е����ɶ��塣����㷢������֧�ֲֿ⣬�뼰ʱ������ϵ��
-
-4���Զ� ���� task_before.sh �����ļ����أ�Ĭ����1����ʾ����������Ϊ0����ʾ�رա�����·�� /ql/config/bak/
-BAKUP="1";
-
-5���Զ�������ָ���˻�������������Ӱ����Щ�ʺ����������ʺš�������� code.sh ���ݣ�
-
-6������������Ѽ�⵽ code.sh�������У�˵��code.sh�������̹߳��࣬���ǿ�����У����ܻᵼ�»�����͹���д���쳣�����������ǵ�һ�����ԡ������Ҫǿ�����У��������£�
-
-ǿ�����з�����
-���޸�config.sh
-DEBUG="1"
-�����־����߳�����9
-
-������code.sh����
-$(ps | grep code.sh | grep -v grep | wc -l)" -gt 8
-
-��8�ĳ�9��Ȼ��code.sh�������У�����������ô������Ϊ����һ��������ơ�
+for i in $package_name; do
+    case $i in
+        canvas)
+            cd /ql/scripts
+            npm ls $i
+            ;;
+        *)
+            npm ls $i -g
+            ;;
+    esac
+done

@@ -10,7 +10,7 @@
             "time":"37 8 * 5,6 *",
             "job":{
                 "type":"runjs",
-                "target":"https://ghproxy.com/https://raw.githubusercontent.com/Oreomeow/dust/dust/member/adolf_oneplus.js"
+                "target":"https://git.metauniverse-cn.com/https://raw.githubusercontent.com/Oreomeow/dust/dust/member/adolf_oneplus.js"
             },
             "running":true
         },
@@ -20,7 +20,7 @@
             "time":"27 8 * 5,6 *",
             "job":{
                 "type":"runjs",
-                "target":"https://ghproxy.com/https://raw.githubusercontent.com/Oreomeow/dust/dust/member/adolf_flp.js"
+                "target":"https://git.metauniverse-cn.com/https://raw.githubusercontent.com/Oreomeow/dust/dust/member/adolf_flp.js"
             },
             "running":true
         },
@@ -30,7 +30,7 @@
             "time":"0 8 21-31 5-12 *",
             "job":{
                 "type":"runjs",
-                "target":"https://ghproxy.com/https://raw.githubusercontent.com/qqsdff/script/main/jd/jd_jbczy.js"
+                "target":"https://git.metauniverse-cn.com/https://raw.githubusercontent.com/qqsdff/script/main/jd/jd_jbczy.js"
             }
         },
         {
@@ -39,7 +39,7 @@
             "time":"15 8,19 * 5,6 *",
             "job":{
                 "type":"runjs",
-                "target":"https://ghproxy.com/https://raw.githubusercontent.com/Oreomeow/dust/dust/normal/adolf_superbox.js"
+                "target":"https://git.metauniverse-cn.com/https://raw.githubusercontent.com/Oreomeow/dust/dust/normal/adolf_superbox.js"
             }
         },
         {
@@ -48,7 +48,7 @@
             "time":"5 9,15 * 5,6 *",
             "job":{
                 "type":"runjs",
-                "target":"https://ghproxy.com/https://raw.githubusercontent.com/Oreomeow/dust/dust/normal/adolf_newInteraction.js"
+                "target":"https://git.metauniverse-cn.com/https://raw.githubusercontent.com/Oreomeow/dust/dust/normal/adolf_newInteraction.js"
             }
         }
     ]
