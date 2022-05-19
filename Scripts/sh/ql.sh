@@ -13,11 +13,23 @@ echo -e "\e[36m
        ▀                        ▀████▀▀                                 ▀████▀▀
 \e[0m\n"
 
+echo -------------------------------
+echo "目前推荐版本 - 不会白屏" 
+echo "2.11.0   |   2.11.3"
+echo -------------------------------
+read -r -p "请输入要安装的青龙版本:" ql
+if  [ ! -n "$ql" ] ;then
+ ql="2.11.3"
+ echo "本一键仅支持到2.11.3版本"
+ echo "您设置的当前版本${ql}"
+else
+  echo "您设置的当前版本${ql}"
+fi 
 DOCKER_IMG_NAME="yanyuwangluo/qinglong"
 JD_PATH=""
 SHELL_FOLDER=$(pwd)
 CONTAINER_NAME=""
-TAG="2.10.13"
+TAG="${ql}"
 NETWORK="bridge"
 JD_PORT=5700
 NINJA_PORT=5701
@@ -80,7 +92,8 @@ docker_install() {
 }
 
 docker_install
-warn "Faker系列仓库一键安装配置，一键安装的青龙版本为2.10.13稳定版，小白回车到底，一路默认选择"
+warn "目前因为  jsDelivr 的问题导致部分版本白屏。"
+warn "Faker系列仓库一键安装配置，小白回车到底，一路默认选择"
 # 配置文件保存目录
 echo -n -e "\e[33m一、请输入配置文件保存的绝对路径（示例：/root)，回车默认为当前目录:\e[0m"
 read jd_path
