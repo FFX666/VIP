@@ -59,7 +59,7 @@ dl_extra_shell() {
     if [ ! -a "$extra_shell_path" ]; then
         touch $extra_shell_path
     fi
-    curl -s --connect-timeout 3 https://raw.githubusercontent.com/Oreomeow/VIP/main/Tasks/qlrepo/extra.sh > $extra_shell_path
+    curl -s --connect-timeout 3 https://raw.githubusercontent.com/yanyuwangluo/VIP/main/Tasks/qlrepo/extra.sh > $extra_shell_path
     cp $extra_shell_path $dir_config/extra.sh
     # 判断是否下载成功
     extra_size=$(ls -l $extra_shell_path | awk '{print $5}')

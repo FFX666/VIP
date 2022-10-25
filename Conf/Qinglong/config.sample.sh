@@ -1,6 +1,6 @@
-## Version: v3.0.0
-## Date: 2021-11-12
-## Mod: Build20211112-002 Faker Repository config
+## Version: v4.0.0
+## Date: 2022-08-31
+## Mod: Build20220831-002 Faker Repository config
 ## Update Content: 可持续发展纲要\n1. session管理破坏性修改\n2. 配置管理可编辑config下文件\n3. 自定义脚本改为查看脚本\n4. 移除互助相关
 
 ## 上面版本号中，如果第2位数字有变化，那么代表增加了新的参数，如果只有第3位数字有变化，仅代表更新了注释，没有增加新的参数，可更新可不更新
@@ -12,7 +12,7 @@ AutoDelCron="true"
 AutoAddCron="true"
 
 ## ql repo命令拉取脚本时需要拉取的文件后缀，直接写文件后缀名即可
-RepoFileExtensions="js py ts"
+RepoFileExtensions="js py ts so"
 
 ## 由于github仓库拉取较慢，所以会默认添加代理前缀，如不需要请移除
 GithubProxyUrl="https://git.metauniverse-cn.com/"
