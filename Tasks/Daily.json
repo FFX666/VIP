@@ -1,9 +1,19 @@
 {
     "name":"羊毛",
-    "author":"旺仔，Leon",
-    "desc":"旺仔 制作.xlsx文件，Leon 修订并转换成.json的任务订阅。该订阅适用于 elecV2P，与其他软件并不兼容。相关说明参考：https://github.com/elecV2/elecV2P-dei/tree/master/docs/06-task.md",
-    "date":"2021-07-03 03:13:00",
+    "author":"Leon",
+    "desc":"该订阅适用于 elecV2P，与其他软件并不兼容。相关说明参考：https://github.com/elecV2/elecV2P-dei/tree/master/docs/06-task.md",
+    "date":"2021-08-14 21:45:00",
     "list":[
+        {
+            "name":"安装依赖",
+            "type":"schedule",
+            "time":"0",
+            "job":{
+                "type":"exec",
+                "target":"wget -q https://raw.githubusercontent.com/Oreomeow/VIP/main/Scripts/py/requirements.txt -O requirements.txt && pip3 install -r requirements.txt"
+            },
+            "running":false
+        },
         {
             "name":"中青看点看看赚&浏览赚(需配合专用重写获取cookie)",
             "type":"cron",
@@ -35,42 +45,32 @@
             "running":true
         },
         {
-            "name":"京喜财富岛提现并发修改版ztxtop",
+            "name":"EUserv 续期",
             "type":"cron",
-            "time":"0 0 0 * * *",
+            "time":"0 10 */7 * *",
             "job":{
                 "type":"runjs",
-                "target":"jx_cfdtx.js"
+                "target":"https://raw.githubusercontent.com/Oreomeow/VIP/main/Scripts/js/EUserv_extend.js"
             },
             "running":true
         },
         {
-            "name":"京东东东超市兑换奖品",
+            "name":"小米运动改步",
             "type":"cron",
-            "time":"0 0 0 * * *",
+            "time":"25 20 * * *",
             "job":{
                 "type":"runjs",
-                "target":"jd_blueCoin.js"
+                "target":"https://raw.githubusercontent.com/Oreomeow/VIP/main/Scripts/js/mimotion.js"
             },
             "running":true
         },
         {
-            "name":"整点红包雨",
+            "name":"Freenom 续期",
             "type":"cron",
-            "time":"0 0 0-23/1 * * *",
+            "time":"25 7 */10 * *",
             "job":{
                 "type":"runjs",
-                "target":"long_super_redrain.js"
-            },
-            "running":true
-        },
-        {
-            "name":"半点红包雨",
-            "type":"cron",
-            "time":"0 30 16-23/1 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"long_half_redrain.js"
+                "target":"https://raw.githubusercontent.com/Oreomeow/VIP/main/Scripts/js/FNplus.js"
             },
             "running":true
         }

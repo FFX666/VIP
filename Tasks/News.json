@@ -22,12 +22,12 @@
                 "type":"runjs",
                 "target":"https://raw.githubusercontent.com/Oreomeow/VIP/main/Scripts/js/News/wechatsubs.js"
             },
-            "running":true
+            "running":false
         },
         {
             "name":"NASA每日一图",
             "type":"cron",
-            "time":"0 8 * * *",
+            "time":"0 16 * * *",
             "job":{
                 "type":"runjs",
                 "target":"https://raw.githubusercontent.com/evilbutcher/Quantumult_X/master/check_in/nasa/nasapic.js"
@@ -37,7 +37,7 @@
         {
             "name":"iDaily",
             "type":"cron",
-            "time":"30 8 * * *",
+            "time":"30 19 * * *",
             "job":{
                 "type":"runjs",
                 "target":"https://raw.githubusercontent.com/evilbutcher/Quantumult_X/master/check_in/idaily/idaily.js"
@@ -51,6 +51,26 @@
             "job":{
                 "type":"runjs",
                 "target":"https://raw.githubusercontent.com/zZPiglet/Task/master/MovieCalendar/MovieCalendar.js"
+            },
+            "running":true
+        },
+        {
+            "name":"东京奥运会🏅金牌榜",
+            "type":"cron",
+            "time":"0 */6 * * *",
+            "job":{
+                "type":"runjs",
+                "target":"https://raw.githubusercontent.com/ddgksf2013/Cuttlefish/master/Script/OlympicRanking.js"
+            },
+            "running":false
+        },
+        {
+            "name":"Epic 周免",
+            "type":"cron",
+            "time":"10 11 */3 * *",
+            "job":{
+                "type":"runjs",
+                "target":"https://raw.githubusercontent.com/Peng-YM/QuanX/master/Tasks/epic.js"
             },
             "running":true
         }

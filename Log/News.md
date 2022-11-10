@@ -1,9 +1,53 @@
 # News
+## 07.31 16:15
+- qinglong docker-compose.yml
+``` yaml
+version: "3"
+services:
+  qinglong:
+    image: whyour/qinglong:latest
+    container_name: qinglong
+    hostname: qinglong
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "5700:5700"
+      - "5701:5701"
+    volumes:
+      - ./config:/ql/config
+      - ./db:/ql/db
+      - ./log:/ql/log
+      - ./repo:/ql/repo
+      - ./raw:/ql/raw
+      - ./scripts:/ql/scripts
+      - ./jbot:/ql/jbot
+      - ./ninja:/ql/ninja
+    environment: 
+      - ENABLE_HANGUP=true
+      - ENABLE_TG_BOT=true
+      - ENABLE_WEB_PANEL=true
+      - TZ=CST-8
+```
+- 解决青龙拉取`smiek2221/scripts`更新错误问题
+``` sh
+docker exec -it qinglong bash -c 'cd repo/smiek2221_scripts && git fetch --all && git reset --hard origin/master && git pull && ql repo https://github.com/smiek2221/scripts.git "jd_" "USER_AGENTS" "JDJRValidator_Pure|sign_graphics_validate|ZooFaker_Necklace"'
+```
+- `JDHelloWorld` ts
+``` sh
+cd /ql/scripts/
+ql repo https://github.com/JDHelloWorld/jd_scripts.git "
+jd_|jx_|getJDCookie" "activity|backUp|Coupon|enen" "^jd[^_]|USER"
+cp /ql/repo/JDHelloWorld_jd_scripts/package.json .
+npm i
+npm i -g ts-node typescript @types/node date-fns axios
+tsc JDHelloWorld_jd_scripts_jd_cfd.ts
+task JDHelloWorld_jd_scripts_jd_cfd.js now
+```
 ## 07.01 18:40
-- 解决青龙拉取库更新错误问题
+- 解决青龙拉取`JDHelloWorld/jd_scripts`更新错误问题
 > https://github.com/JDHelloWorld/jd_scripts/issues/57
 
-```
+``` sh
 docker exec -it qinglong bash -c 'cd repo/JDHelloWorld_jd_scripts && git fetch --all && git reset --hard origin/main && git pull && ql repo https://github.com/JDHelloWorld/jd_scripts.git "jd_|jx_|getJDCookie" "activity|backUp|jd_delCoupon" "^jd[^_]|USER"'
 ```
 
